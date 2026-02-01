@@ -1,13 +1,6 @@
-.title-with-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px; /* space between image and text */
-}
-
 .friday-img {
-  width: 30px;   /* adjust size as needed */
-  height: 30px;  /* keep 1:1 ratio */
+  width: 40px;   /* small, like a profile image */
+  height: 40px;  /* keep 1:1 ratio */
   object-fit: cover;
-  border-radius: 10%; /* optional: rounded corners */
+  border-radius: 50%; /* makes it a circle for profile image style */
 }

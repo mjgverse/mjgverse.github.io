@@ -2,25 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>MJ Corelink</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       margin: 0;
-      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #0d1117;
-      color: #c9d1d9;
-      font-family: system-ui, sans-serif;
+      height: 100vh;
+      text-align: center;
     }
+
+    .box {
+      max-width: 500px;
+      padding: 30px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 0 30px rgba(0,0,0,0.3);
+    }
+
     h1 {
-      font-size: 3rem;
+      margin-bottom: 10px;
+      font-size: 2.2rem;
+    }
+
+    p {
+      opacity: 0.85;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #38bdf8;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0ea5e9;
     }
   </style>
 </head>
 <body>
-  <h1>🚀 MJ Corelink is live</h1>
+
+  <div class="box">
+    <h1>👋 Welcome</h1>
+    <p>Thanks for visiting my website.</p>
+    <button onclick="alert('Thanks for visiting! 😊')">
+      Say Hi
+    </button>
+  </div>
+
 </body>
 </html>

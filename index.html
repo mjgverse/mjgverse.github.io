@@ -3,156 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Landing Page</title>
-    <link rel="stylesheet" href="style.css"> <!-- your CSS file -->
+    <title>Mark John Gonzalvo | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <div class="container">
+        <section class="profile-side">
+            <div class="pfp-container">
+                <img src="pfp.jpg" alt="Mark John Gonzalvo">
+            </div>
+            <h1>Mark John Gonzalvo</h1>
+            <p class="titles">Customer Service<br>Content Moderator<br>Administrative Support</p>
+            
+            <a href="mailto:your@email.com" class="email-btn">Email me</a>
 
-    <!-- Your main page content here -->
-    <h1>Welcome to my website!</h1>
-    <p>Some content here...</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </section>
 
-    <!-- === Put the popup container here, just inside <body> === -->
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <span class="close-btn" onclick="closePopup()">&times;</span>
-            <p>Hi, Good day! My name is FRIDAY. I am MJ AI assistant.</p>
-        </div>
+        <section class="about-side">
+            <div class="about-card">
+                <h2>ABOUT ME</h2>
+                <p>
+                    Customer Service and Technical Support with experience in chat, voice, and email support, 
+                    data entry, content moderation, and AI/Machine Learning projects. Known for 
+                    adaptability, efficiency, and the ability to handle multiple tasks effectively.
+                </p>
+                <div class="button-group">
+                    <a href="#" class="card-btn">Resume</a>
+                    <a href="#" class="card-btn">Portfolio</a>
+                </div>
+            </div>
+        </section>
     </div>
-
-    <!-- Your other content can go here -->
-
-    <!-- JavaScript: Put this at the end of <body> -->
-    <script>
-    function closePopup() {
-        document.getElementById('popup').style.display = 'none';
-    }
-
-    // Optional: show popup automatically on page load
-    window.onload = function() {
-        document.getElementById('popup').style.display = 'block';
-    }
-    </script>
-</body>
-</html>
-
-
-
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: #f6c453; /* yellow */
-      font-family: Arial, Helvetica, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Top window card */
-    .window {
-      background: #f5f5f5;
-      border: 3px solid #222;
-      box-shadow: 6px 6px 0 #222;
-      width: 420px;
-      margin-bottom: 50px;
-    }
-
-    .window-bar {
-      height: 36px;
-      border-bottom: 3px solid #222;
-      display: flex;
-      align-items: center;
-      padding-left: 10px;
-      gap: 8px;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border: 2px solid #222;
-      border-radius: 50%;
-    }
-
-    .window-content {
-      padding: 30px;
-      text-align: center;
-    }
-
-    .window-content h1 {
-      margin: 0;
-      font-size: 42px;
-      font-weight: 800;
-      color: #222;
-    }
-
-    .window-content p {
-      margin-top: 10px;
-      font-style: italic;
-      color: #333;
-    }
-
-    /* Button grid */
-    .buttons {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-      max-width: 700px;
-      width: 90%;
-    }
-
-    .btn {
-      background: #f5f5f5;
-      border: 3px solid #222;
-      box-shadow: 6px 6px 0 #222;
-      padding: 18px 10px;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      transform: translate(2px, 2px);
-      box-shadow: 4px 4px 0 #222;
-    }
-
-    /* Mobile */
-    @media (max-width: 700px) {
-      .buttons {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .window {
-        width: 90%;
-      }
-    }
-  </style>
-</head>
-<body>
-
-
-
-
-  
-<div class="window-content">
-  <div class="title-with-image">
-    <img src="assets/friday.jpg" alt="Friday Image" class="friday-img">
-    <h1>Friday</h1>
-  </div>
-  <p>AI Agent Assistant</p>
-</div>
-
-
-  <!-- Buttons -->
-  <div class="buttons">
-    <button class="btn">Talk to Friday</button>
-    <button class="btn">MJ Resume</button>
-    <button class="btn">MJ Portfolio</button>
-    <button class="btn">Random</button>
-    <button class="btn">Blog</button>
-    <button class="btn">Contact Us</button>
-  </div>
-
 </body>
 </html>

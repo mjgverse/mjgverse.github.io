@@ -12,13 +12,41 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    min-height: 100vh;
+    /* CHANGE THIS: Remove flex and center alignment from body */
+    display: block; 
+    width: 100%;
+    margin: 0;
+    padding: 0;
     color: white;
-    padding: 20px;
     overflow-x: hidden;
+}
+
+/* New wrapper to ensure Page 1 takes up the whole screen first */
+.page-one-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1150px;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    z-index: 10;
+    /* Remove the float animation if it's causing overlapping issues */
+}
+
+.page-two {
+    min-height: 100vh; /* Forces Page 2 to be its own full screen below Page 1 */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4); 
 }
 
 /* --- SPACE ANIMATION OVERLAY --- */

@@ -20,6 +20,172 @@ body {
     padding: 20px;
 }
 
+/* Container for all space animations */
+.space-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Behind your content */
+    overflow: hidden;
+    pointer-events: none; /* Allows clicks to pass through to buttons */
+}
+
+/* --- TWINKLING EFFECT --- */
+.stars-twinkle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+    opacity: 0.3;
+    animation: twinkleMove 100s linear infinite;
+}
+
+@keyframes twinkleMove {
+    from { background-position: 0 0; }
+    to { background-position: -10000px 5000px; }
+}
+
+/* --- METEOR (Shooting Star) EFFECT --- */
+[class^="meteor-"] {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px white;
+    opacity: 0;
+}
+
+/* The tail of the meteor */
+[class^="meteor-"]::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, white, transparent);
+}
+
+.meteor-1 {
+    top: -10%;
+    right: 20%;
+    animation: shootingStar 7s ease-in infinite;
+    animation-delay: 2s;
+}
+
+.meteor-2 {
+    top: 10%;
+    right: -10%;
+    animation: shootingStar 12s ease-in infinite;
+    animation-delay: 8s;
+}
+
+@keyframes shootingStar {
+    0% {
+        transform: rotate(315deg) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    20% {
+        transform: rotate(315deg) translateX(-1000px);
+        opacity: 0;
+    }
+    100% {
+        transform: rotate(315deg) translateX(-1000px);
+        opacity: 0;
+    }
+}
+
+/* Container for all space animations */
+.space-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Behind your content */
+    overflow: hidden;
+    pointer-events: none; /* Allows clicks to pass through to buttons */
+}
+
+/* --- TWINKLING EFFECT --- */
+.stars-twinkle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+    opacity: 0.3;
+    animation: twinkleMove 100s linear infinite;
+}
+
+@keyframes twinkleMove {
+    from { background-position: 0 0; }
+    to { background-position: -10000px 5000px; }
+}
+
+/* --- METEOR (Shooting Star) EFFECT --- */
+[class^="meteor-"] {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px white;
+    opacity: 0;
+}
+
+/* The tail of the meteor */
+[class^="meteor-"]::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, white, transparent);
+}
+
+.meteor-1 {
+    top: -10%;
+    right: 20%;
+    animation: shootingStar 7s ease-in infinite;
+    animation-delay: 2s;
+}
+
+.meteor-2 {
+    top: 10%;
+    right: -10%;
+    animation: shootingStar 12s ease-in infinite;
+    animation-delay: 8s;
+}
+
+@keyframes shootingStar {
+    0% {
+        transform: rotate(315deg) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    20% {
+        transform: rotate(315deg) translateX(-1000px);
+        opacity: 0;
+    }
+    100% {
+        transform: rotate(315deg) translateX(-1000px);
+        opacity: 0;
+    }
+}
+
 .container {
     display: flex;
     width: 100%;

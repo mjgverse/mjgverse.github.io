@@ -1,104 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mark John Gonzalvo | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark John Gonzalvo | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
-    
-    <div class="space-overlay">
-        <div class="stars-twinkle"></div>
-        <div class="glow-stars"></div> 
-        <div class="meteor-1"></div>
-        <div class="meteor-2"></div>
-    </div>
-    
-    <div class="container" id="home-section">
-        <section class="profile-side">
-            <div id="welcome-bubble" class="speech-bubble">
-                Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant in the bottom corner if you have any questions!           
-            </div>
-            
-            <div class="pfp-container">
-                <img src="assets/pfp.jpg" alt="Mark John Gonzalvo"> 
-            </div>
-            <h1>Mark John Gonzalvo</h1>
-            <p class="titles">Customer Service<br>Content Moderator<br>Administrative Support</p>
-          
-            <a href="mailto:your@email.com" class="email-btn">Email me</a>
+    <div class="space-overlay">
+        <div class="stars-twinkle"></div>
+        <div class="glow-stars"></div> 
+        <div class="meteor-1"></div>
+        <div class="meteor-2"></div>
+    </div>
+    
+    <div class="container" id="home-section">
+        
+        <section class="profile-side">
+            <div id="welcome-bubble" class="speech-bubble">
+                Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant in the bottom corner if you have any questions!           
+            </div>
+            
+            <div class="pfp-container">
+                <img src="assets/pfp.jpg" alt="Mark John Gonzalvo"> 
+            </div>
+            <h1>Mark John Gonzalvo</h1>
+            <p class="titles">Customer Service<br>Content Moderator<br>Administrative Support</p>
+          
+            <a href="mailto:your@email.com" class="email-btn">Email me</a>
 
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-x-twitter"></i></a> 
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-        </section>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-x-twitter"></i></a> 
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </section>
 
-        <section class="about-side">
-            <div class="about-card">
-                <h2>ABOUT ME</h2>
-                <p>
-                    I’ve spent years in customer service and tech support, helping 
-                    people through chat, calls, and emails. I also do content moderation, 
-                    data tasks, and AI projects. I’m adaptable, efficient, and keep everything 
-                    organized, even when things get busy.
-                </p>
-                <div class="button-group">
-                    <a href="assets/MJ_Gonzalvo_Resume.pdf" target="_blank" class="card-btn">Resume</a>
-                    <a href="#gallery-section" class="card-btn">Portfolio</a>
-                </div>
-            </div>
-        </section>
-    </div>
+        <section class="about-side">
+            <div class="about-card">
+                <h2>ABOUT ME</h2>
+                <p>
+                    I’ve spent years in customer service and tech support, helping 
+                    people through chat, calls, and emails. I also do content moderation, 
+                    data tasks, and AI projects. I’m adaptable, efficient, and keep everything 
+                    organized, even when things get busy.
+                </p>
+                <div class="button-group">
+                    <a href="assets/MJ_Gonzalvo_Resume.pdf" target="_blank" class="card-btn">Resume</a>
+                    <a href="#gallery-section" class="card-btn">Portfolio</a>
+                </div>
+            </div>
+        </section>
+        
+    </div> <div id="pfp-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="img-expanded">
+    </div>
 
+    <script>
+      window.chatbaseConfig = {
+        chatbotId: "aWn99QuaimyS0A8WuIJVn",
+        showFloatingInitialMessages: true, 
+        floatingInitialMessagesDelay: 3, 
+      };
+    </script>
+    <script src="https://www.chatbase.co/embed.min.js" id="aWn99QuaimyS0A8WuIJVn" defer></script>
 
-    <div id="pfp-modal" class="modal">
-        <span class="close-modal">&times;</span>
-        <img class="modal-content" id="img-expanded">
-    </div>
+    <script>
+        // Welcome Bubble Logic
+        window.addEventListener('load', function() {
+            const bubble = document.getElementById('welcome-bubble');
+            if (bubble) {
+                setTimeout(() => {
+                    bubble.style.opacity = '0';
+                    setTimeout(() => { bubble.style.display = 'none'; }, 1000); 
+                }, 30000); 
+            }
+        });
 
-    <script>
-      window.chatbaseConfig = {
-        chatbotId: "aWn99QuaimyS0A8WuIJVn",
-        showFloatingInitialMessages: true, 
-        floatingInitialMessagesDelay: 3, 
-      };
-    </script>
-    <script src="https://www.chatbase.co/embed.min.js" id="aWn99QuaimyS0A8WuIJVn" defer></script>
+        // PFP Modal Logic
+        document.addEventListener("DOMContentLoaded", function() {
+            const modal = document.getElementById("pfp-modal");
+            const pfpImg = document.querySelector(".pfp-container img");
+            const modalImg = document.getElementById("img-expanded");
+            const closeBtn = document.querySelector(".close-modal");
 
-    <script>
-        // Welcome Bubble Logic
-        window.addEventListener('load', function() {
-            const bubble = document.getElementById('welcome-bubble');
-            if (bubble) {
-                setTimeout(() => {
-                    bubble.style.opacity = '0';
-                    setTimeout(() => { bubble.style.display = 'none'; }, 1000); 
-                }, 30000); 
-            }
-        });
-
-        // PFP Modal Logic
-        document.addEventListener("DOMContentLoaded", function() {
-            const modal = document.getElementById("pfp-modal");
-            const pfpImg = document.querySelector(".pfp-container img");
-            const modalImg = document.getElementById("img-expanded");
-            const closeBtn = document.querySelector(".close-modal");
-
-            if (pfpImg) {
-                pfpImg.onclick = function() {
-                    modal.style.display = "flex";
-                    modalImg.src = this.src;
-                }
-            }
-            if (closeBtn) closeBtn.onclick = () => modal.style.display = "none";
-            window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
-        });
-    </script>
+            if (pfpImg) {
+                pfpImg.onclick = function() {
+                    modal.style.display = "flex";
+                    modalImg.src = this.src;
+                }
+            }
+            if (closeBtn) closeBtn.onclick = () => modal.style.display = "none";
+            window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
+        });
+    </script>
 </body>
 </html>

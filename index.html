@@ -6,6 +6,38 @@
     <title>Mark John Gonzalvo | Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <div id="pfp-modal" class="modal">
+      <span class="close-modal">&times;</span>
+      <img class="modal-content" id="img-expanded">
+    </div>
+
+    <script>
+        // --- Profile Picture Lightbox Logic ---
+        const modal = document.getElementById("pfp-modal");
+        const pfpImg = document.querySelector(".pfp-container img");
+        const modalImg = document.getElementById("img-expanded");
+        const closeBtn = document.querySelector(".close-modal");
+
+        pfpImg.onclick = function() {
+            modal.style.display = "flex";
+            modalImg.src = this.src;
+        }
+
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Modified this part slightly to play nice with other scripts
+        window.addEventListener('click', function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
+
 </head>
 <body>
 
@@ -14,6 +46,8 @@
     <div class="glow-stars"></div> <div class="meteor-1"></div>
     <div class="meteor-2"></div>
     </div>
+
+
     
     <div class="container">
       <section class="profile-side">
@@ -27,6 +61,7 @@
     <p class="titles">Customer Service<br>Content Moderator<br>Administrative Support</p>
 
 
+          
             <a href="mailto:your@email.com" class="email-btn">Email me</a>
 
             <div class="social-icons">

@@ -16,11 +16,10 @@
         <div class="meteor-2"></div>
     </div>
     
-    <div class="container">
+    <div class="container" id="home-section">
         <section class="profile-side">
             <div id="welcome-bubble" class="speech-bubble">
-
-Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant in the bottom corner if you have any questions!           
+                Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant in the bottom corner if you have any questions!           
             </div>
             
             <div class="pfp-container">
@@ -50,10 +49,39 @@ Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant in
                 </p>
                 <div class="button-group">
                     <a href="assets/MJ_Gonzalvo_Resume.pdf" target="_blank" class="card-btn">Resume</a>
-                    <a href="#" class="card-btn">Portfolio</a>
+                    <a href="#gallery-section" class="card-btn">Portfolio</a>
                 </div>
             </div>
         </section>
+    </div>
+
+    <div class="page-two" id="gallery-section">
+        <div class="gallery-layout">
+            
+            <div class="phone-mockup">
+                <img src="assets/phone-frame.png" alt="Phone Frame" class="phone-frame-img">
+                <div class="phone-screen-content">
+                    <p class="temp-text">Images will appear here</p>
+                </div>
+            </div>
+
+            <div class="about-card gallery-info">
+                <h2>Gallery</h2>
+                <p>
+                    All the images here are samples of my work in content moderation, 
+                    customer support documentation, and various AI data projects. 
+                    I focus on precision, quality, and maintaining safety standards.
+                </p>
+                <div class="button-group">
+                    <a href="#" class="card-btn">Prev</a>
+                    <a href="#" class="card-btn">Next</a>
+                </div>
+                <div style="margin-top: 20px;">
+                    <a href="#home-section" style="color: #00d4ff; text-decoration: none; font-size: 0.8rem;">↑ Back to Top</a>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <div id="pfp-modal" class="modal">
@@ -68,11 +96,10 @@ Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant in
         floatingInitialMessagesDelay: 3, 
       };
     </script>
-    <script>
-    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="aWn99QuaimyS0A8WuIJVn";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-    </script>
+    <script src="https://www.chatbase.co/embed.min.js" id="aWn99QuaimyS0A8WuIJVn" defer></script>
 
     <script>
+        // Welcome Bubble Logic
         window.addEventListener('load', function() {
             const bubble = document.getElementById('welcome-bubble');
             if (bubble) {
@@ -82,9 +109,8 @@ Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant in
                 }, 30000); 
             }
         });
-    </script>
 
-    <script>
+        // PFP Modal Logic
         document.addEventListener("DOMContentLoaded", function() {
             const modal = document.getElementById("pfp-modal");
             const pfpImg = document.querySelector(".pfp-container img");
@@ -97,46 +123,9 @@ Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant in
                     modalImg.src = this.src;
                 }
             }
-
-            if (closeBtn) {
-                closeBtn.onclick = function() {
-                    modal.style.display = "none";
-                }
-            }
-
-            window.addEventListener('click', function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            });
+            if (closeBtn) closeBtn.onclick = () => modal.style.display = "none";
+            window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
         });
     </script>
-
-    <div class="page-two" id="gallery-section">
-    <div class="gallery-layout">
-        
-        <div class="phone-mockup">
-            <img src="assets/phone-frame.png" alt="Phone Frame" class="phone-frame-img">
-            <div class="phone-screen-content">
-                <p class="temp-text">Images will appear here</p>
-            </div>
-        </div>
-
-        <div class="about-card gallery-info">
-            <h2>Gallery</h2>
-            <p>
-                All the images here are samples of my work in content moderation, 
-                customer support documentation, and various AI data projects. 
-                I focus on precision, quality, and maintaining safety standards.
-            </p>
-            <div class="button-group">
-                <a href="#" class="card-btn">Prev</a>
-                <a href="#" class="card-btn">Next</a>
-            </div>
-        </div>
-
-    </div>
-</div>
-
 </body>
 </html>

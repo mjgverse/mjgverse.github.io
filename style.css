@@ -50,22 +50,36 @@ body {
 
 /* --- SPACE ANIMATIONS (Meteors & Twinkle) --- */
 
-/* --- BRIGHT GLOWING STARS --- */
 .glow-stars {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 2px;
     height: 2px;
     background: white;
     border-radius: 50%;
-    /* We create multiple stars using box-shadows at different coordinates */
+    /* These coordinates spread the stars out */
     box-shadow: 
-        400px 200px #fff, 
-        800px 400px #fff, 
-        1200px 100px #fff, 
-        200px 600px #fff, 
-        1500px 700px #fff, 
-        1000px 900px #fff;
+        15vw 10vh 2px 1px #fff, 
+        35vw 45vh 2px 1px #fff, 
+        65vw 15vh 2px 1px #fff, 
+        85vw 50vh 2px 1px #fff, 
+        25vw 80vh 2px 1px #fff, 
+        75vw 85vh 2px 1px #fff,
+        50vw 30vh 2px 1px #fff;
+    opacity: 1;
     animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { 
+        opacity: 0.4; 
+        transform: scale(1); 
+    }
+    50% { 
+        opacity: 1; 
+        transform: scale(1.5); 
+    }
 }
 
 @keyframes glowPulse {

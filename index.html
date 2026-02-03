@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mark John Gonzalvo | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-</head>
 <body>
-
-    
     <div class="space-overlay">
         <div class="stars-twinkle"></div>
         <div class="glow-stars"></div> 
@@ -18,6 +7,7 @@
     </div>
     
     <div class="container" id="home-section">
+        
         <section class="profile-side">
             <div id="welcome-bubble" class="speech-bubble">
                 Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant in the bottom corner if you have any questions!           
@@ -54,51 +44,11 @@
                 </div>
             </div>
         </section>
-    </div>
-
-
-    <div id="pfp-modal" class="modal">
+        
+    </div> <div id="pfp-modal" class="modal">
         <span class="close-modal">&times;</span>
         <img class="modal-content" id="img-expanded">
     </div>
 
-    <script>
-      window.chatbaseConfig = {
-        chatbotId: "aWn99QuaimyS0A8WuIJVn",
-        showFloatingInitialMessages: true, 
-        floatingInitialMessagesDelay: 3, 
-      };
-    </script>
-    <script src="https://www.chatbase.co/embed.min.js" id="aWn99QuaimyS0A8WuIJVn" defer></script>
-
-    <script>
-        // Welcome Bubble Logic
-        window.addEventListener('load', function() {
-            const bubble = document.getElementById('welcome-bubble');
-            if (bubble) {
-                setTimeout(() => {
-                    bubble.style.opacity = '0';
-                    setTimeout(() => { bubble.style.display = 'none'; }, 1000); 
-                }, 30000); 
-            }
-        });
-
-        // PFP Modal Logic
-        document.addEventListener("DOMContentLoaded", function() {
-            const modal = document.getElementById("pfp-modal");
-            const pfpImg = document.querySelector(".pfp-container img");
-            const modalImg = document.getElementById("img-expanded");
-            const closeBtn = document.querySelector(".close-modal");
-
-            if (pfpImg) {
-                pfpImg.onclick = function() {
-                    modal.style.display = "flex";
-                    modalImg.src = this.src;
-                }
-            }
-            if (closeBtn) closeBtn.onclick = () => modal.style.display = "none";
-            window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
-        });
-    </script>
+    <script>...</script>
 </body>
-</html>

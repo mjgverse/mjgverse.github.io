@@ -16,16 +16,20 @@
         <div class="glow-stars"></div> 
         <div class="meteor-1"></div>
         <div class="meteor-2"></div>
+         <div class="meteor-3"></div>
+                 <div class="meteor-4"></div>
+
     </div>
     
     <div class="container" id="home-section">
+        
         <section class="profile-side">
             <div id="welcome-bubble" class="speech-bubble">
-                Hi, MJ here! Welcome to my space site. Check out my certificates in the Portfolio!           
+                Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant!           
             </div>
             
             <div class="pfp-container">
-                <img src="assets/pfp.jpg" alt="Mark John Gonzalvo" id="main-pfp"> 
+                <img src="assets/pfp.jpg" alt="Mark John Gonzalvo"> 
             </div>
 
             <h1>Mark John Gonzalvo</h1>
@@ -55,93 +59,53 @@
                 </p>
                 <div class="button-group">
                     <a href="assets/MJ_Gonzalvo_Resume.pdf" target="_blank" class="card-btn">Resume</a>
-                    <a href="javascript:void(0)" class="card-btn" onclick="openPortfolio()">Portfolio</a>
+                    <a href="#gallery-section" class="card-btn">Portfolio</a>
                 </div>
             </div>
         </section>
+        
     </div> 
 
-    <div id="portfolio-modal" class="portfolio-modal">
-        <div class="portfolio-content">
-            <span class="close-portfolio" onclick="closePortfolio()">&times;</span>
-            
-            <div class="frame-container">
-                <button class="nav-btn prev" onclick="changeSlide(-1)">&#10094;</button>
-                
-                <div class="slide-wrapper">
-                    <img id="portfolio-img" src="assets/cert1.jpg" alt="Certificate">
-                    <div class="cert-description">
-                        <p id="cert-text">Certificate 1</p>
-                    </div>
-                </div>
-
-                <button class="nav-btn next" onclick="changeSlide(1)">&#10095;</button>
-            </div>
-        </div>
-    </div>
-
     <div id="pfp-modal" class="modal">
-        <span class="close-modal" id="close-pfp">&times;</span>
+        <span class="close-modal">&times;</span>
         <img class="modal-content" id="img-expanded">
     </div>
 
     <script>
-        // 1. Portfolio Logic
-        let currentSlide = 0;
-        const certs = [
-            { src: 'assets/cert1.jpg', desc: 'Customer Service Excellence Certification' },
-            { src: 'assets/cert2.jpg', desc: 'Technical Support & Troubleshooting' },
-            { src: 'assets/cert3.jpg', desc: 'Professional Content Moderation' }
-        ];
+      window.chatbaseConfig = {
+        chatbotId: "aWn99QuaimyS0A8WuIJVn",
+        showFloatingInitialMessages: true, 
+        floatingInitialMessagesDelay: 3, 
+      };
+    </script>
+    <script src="https://www.chatbase.co/embed.min.js" id="aWn99QuaimyS0A8WuIJVn" defer></script>
 
-        function openPortfolio() {
-            document.getElementById("portfolio-modal").style.display = "flex";
-            updateSlide();
-        }
-
-        function closePortfolio() {
-            document.getElementById("portfolio-modal").style.display = "none";
-        }
-
-        function changeSlide(direction) {
-            currentSlide += direction;
-            if (currentSlide >= certs.length) currentSlide = 0;
-            if (currentSlide < 0) currentSlide = certs.length - 1;
-            updateSlide();
-        }
-
-        function updateSlide() {
-            document.getElementById("portfolio-img").src = certs[currentSlide].src;
-            document.getElementById("cert-text").innerText = certs[currentSlide].desc;
-        }
-
-        // 2. PFP Magnify Logic
-        const pfpImg = document.getElementById("main-pfp");
-        const pfpModal = document.getElementById("pfp-modal");
-        const expImg = document.getElementById("img-expanded");
-
-        pfpImg.onclick = () => {
-            pfpModal.style.display = "flex";
-            expImg.src = pfpImg.src;
-        }
-        document.getElementById("close-pfp").onclick = () => pfpModal.style.display = "none";
-
-        // 3. Close Modals on Outside Click
-        window.onclick = (e) => {
-            if (e.target.className === 'portfolio-modal') closePortfolio();
-            if (e.target.className === 'modal') pfpModal.style.display = "none";
-        }
-
-        // 4. Welcome Bubble Fade
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const bubble = document.getElementById('welcome-bubble');
-                if(bubble) {
+    <script>
+        // Bubble Logic
+        window.addEventListener('load', function() {
+            const bubble = document.getElementById('welcome-bubble');
+            if (bubble) {
+                setTimeout(() => {
                     bubble.style.opacity = '0';
-                    setTimeout(() => bubble.style.display = 'none', 1000);
-                }
-            }, 10000);
+                    setTimeout(() => { bubble.style.display = 'none'; }, 1000); 
+                }, 10000); 
+            }
         });
+
+        // Modal Logic
+        const modal = document.getElementById("pfp-modal");
+        const pfpImg = document.querySelector(".pfp-container img");
+        const modalImg = document.getElementById("img-expanded");
+        const closeBtn = document.querySelector(".close-modal");
+
+        if (pfpImg) {
+            pfpImg.onclick = function() {
+                modal.style.display = "flex";
+                modalImg.src = this.src;
+            }
+        }
+        if (closeBtn) closeBtn.onclick = () => modal.style.display = "none";
+        window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; }
     </script>
 </body>
 </html>

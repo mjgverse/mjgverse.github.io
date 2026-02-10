@@ -1,272 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mark John Gonzalvo | Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <style>
-        /* --- CORE STYLES --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        
-        body { 
-            background: url('assets/bg.jpg') no-repeat center center fixed; 
-            background-size: cover; 
-            color: white; 
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
+<div class="container">
+    <section class="profile-side">
+        <div class="speech-bubble">Hi, MJ here! Welcome to my space site...</div>
+        <div class="pfp-container"><img src="assets/pfp.jpg" id="pfp-trigger"></div>
+        <h1 class="glow-text">Mark John Gonzalvo</h1>
+        <div class="titles-container">
+            <div class="titles-box">Customer Service</div>
+            <div class="titles-box">Content Moderator</div>
+            <div class="titles-box">Administrative Support</div>
+            <div class="titles-box">Freelancer</div>
+        </div>
+        <a href="mailto:your@email.com" class="email-btn" style="margin-bottom:15px;">Email me</a>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-x-twitter"></i></a> 
+        </div>
+    </section>
 
-        .container {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        /* --- LEFT SIDE: PROFILE --- */
-        .profile-side {
-            flex: 0 0 350px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        /* Speech Bubble with Pointer */
-        .speech-bubble {
-            position: relative;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            padding: 12px 18px;
-            border-radius: 15px;
-            font-size: 13px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            line-height: 1.4;
-        }
-
-        .speech-bubble::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 10px solid rgba(0, 0, 0, 0.7);
-        }
-
-        .pfp-container img {
-            width: 170px;
-            height: 170px;
-            border-radius: 50%;
-            border: 3px solid #00d4ff;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-            margin-bottom: 15px;
-            object-fit: cover;
-        }
-
-        .glow-text {
-            font-size: 2rem;
-            text-shadow: 0 0 12px #00d4ff;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        /* Centered & Narrow Labels */
-        .titles-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
-            gap: 8px;
-            margin-bottom: 25px;
-            width: 100%;
-        }
-
-        .titles-box {
-            background: rgba(0, 212, 255, 0.08);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 6px;
-            padding: 6px 0;
-            width: 190px;
-            color: #00d4ff;
-            font-size: 13px;
-            text-align: center;
-            transition: 0.3s;
-        }
-
-        .titles-box:hover {
-            background: rgba(0, 212, 255, 0.2);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
-        }
-
-        /* --- RIGHT SIDE: SUMMARY CARD --- */
-        .about-side { flex: 0 1 550px; }
-
-        .about-card {
-            background: rgba(0, 0, 0, 0.55);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-        }
-
-        .about-card h2 {
-            color: #00d4ff;
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-        }
-
-        .about-card p {
-            font-size: 15px;
-            line-height: 1.7;
-            margin-bottom: 30px;
-            color: #e0e0e0;
-        }
-
-        /* --- BUTTONS & SOCIALS --- */
-        .button-group { display: flex; gap: 15px; }
-
-        .card-btn, .email-btn {
-            text-decoration: none;
-            color: white;
-            border: 1px solid #00d4ff;
-            padding: 10px 24px;
-            border-radius: 8px;
-            background: rgba(0, 212, 255, 0.05);
-            font-size: 14px;
-            font-weight: 600;
-            transition: 0.3s ease;
-            cursor: pointer;
-            display: inline-block;
-        }
-
-        .card-btn:hover, .email-btn:hover {
-            background: #00d4ff;
-            color: black;
-            box-shadow: 0 0 20px #00d4ff;
-        }
-
-        .social-icons { display: flex; gap: 25px; margin-top: 25px; }
-        .social-icons a { 
-            color: white; 
-            font-size: 1.5rem; 
-            transition: 0.3s; 
-            text-decoration: none;
-        }
-        .social-icons a:hover { 
-            color: #00d4ff; 
-            transform: scale(1.15) translateY(-3px);
-            filter: drop-shadow(0 0 8px #00d4ff);
-        }
-
-        /* --- THE MODAL (CRITICAL FIX) --- */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 99999; 
-            left: 0; top: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .album-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 90%;
-            max-width: 1000px;
-            position: relative;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: -50px; right: 0;
-            color: white; font-size: 40px; cursor: pointer;
-        }
-
-        #album-img {
-            max-width: 100%;
-            max-height: 75vh;
-            border: 2px solid #00d4ff;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
-        }
-
-        .album-footer {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 15px 25px;
-            margin-top: 15px;
-            border-bottom: 4px solid #00d4ff;
-            border-radius: 8px;
-            text-align: center;
-            min-width: 300px;
-        }
-
-        .nav-controls { margin-top: 20px; display: flex; gap: 20px; }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .container { flex-direction: column; padding-top: 80px; }
-            .profile-side { flex: 0 0 auto; }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <section class="profile-side">
-            <div class="speech-bubble">
-                Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant in the bottom corner!
+    <section class="about-side">
+        <div class="about-card">
+            <h2 style="color:#00d4ff; margin-bottom:15px;">PROFILE SUMMARY</h2>
+            <p>I’ve spent years in customer service and tech support... (your text here)</p>
+            <div style="display:flex; gap:15px;">
+                <a href="assets/Resume.pdf" target="_blank" class="card-btn">Resume</a>
+                <a href="#" class="card-btn" id="openPortfolio">Portfolio</a>
             </div>
-            
-            <div class="pfp-container">
-                <img src="assets/pfp.jpg" alt="Mark John Gonzalvo"> 
-            </div>
-            
-            <h1 class="glow-text">Mark John Gonzalvo</h1>
-            
-            <div class="titles-container">
-                <div class="titles-box">Customer Service</div>
-                <div class="titles-box">Content Moderator</div>
-                <div class="titles-box">Administrative Support</div>
-                <div class="titles-box">Freelancer</div>
-            </div>
+        </div>
+    </section>
+</div>
 
-            <a href="mailto:your@email.com" class="email-btn">Email me</a>
-
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-x-twitter"></i></a> 
-            </div>
-        </section>
-
-        <section class="about-side">
-            <div class="about-card">
-                <h2>PROFILE SUMMARY</h2>
-                <p>
-                    I’ve spent years in customer service and tech support, helping people through chat, calls, and emails. 
-                    I also do content moderation, data tasks, and AI projects. I’m adaptable, efficient, and keep 
-                    everything organized, even when things get busy.
-                </p>
-                <div class="button-group">
-                    <a href="assets/Resume.pdf" target="_blank" class="card-btn">Resume</a>
-                    <button class="card-btn" id="openPortfolio">Portfolio</button>
-                </div>
-            </div>
-        </section>
+<div id="portfolio-modal" class="modal">
+    <div class="album-wrapper">
+        <span id="close-portfolio" style="position:absolute; top:-40px; right:0; cursor:pointer; font-size:30px;">&times;</span>
+        <img id="album-img" src="">
+        <div class="album-footer">
+            <p id="album-text"></p>
+        </div>
+        <div style="margin-top:20px;">
+            <button id="prevBtn" class="card-btn">Prev</button>
+            <button id="nextBtn" class="card-btn">Next</button>
+        </div>
     </div>
+</div>
 
-    <div id
+<script>
+    const myAchievements = [
+        { src: 'assets/cert1.jpg', desc: 'Top Performer Award - Customer Support 2024' },
+        { src: 'assets/cert2.jpg', desc: 'Movie Anchor Library Top 3 Agent - May 2025' }
+    ];
+
+    let currentIdx = 0;
+    const portModal = document.getElementById("portfolio-modal");
+
+    document.getElementById("openPortfolio").onclick = (e) => {
+        e.preventDefault();
+        portModal.style.display = "flex";
+        updateView();
+    };
+
+    function updateView() {
+        document.getElementById("album-img").src = myAchievements[currentIdx].src;
+        document.getElementById("album-text").innerText = myAchievements[currentIdx].desc;
+    }
+
+    document.getElementById("nextBtn").onclick = () => { currentIdx = (currentIdx + 1) % myAchievements.length; updateView(); };
+    document.getElementById("prevBtn").onclick = () => { currentIdx = (currentIdx - 1 + myAchievements.length) % myAchievements.length; updateView(); };
+    document.getElementById("close-portfolio").onclick = () => portModal.style.display = "none";
+</script>

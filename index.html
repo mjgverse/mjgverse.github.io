@@ -11,13 +11,9 @@
 
     <div class="space-overlay">
         <div class="stars-twinkle"></div>
-        <div class="glow-stars"></div> 
-        <div class="meteor-1"></div>
-        <div class="meteor-2"></div>
     </div>
     
-    <div class="container" id="home-section">
-        
+    <div class="container">
         <section class="profile-side">
             <div id="welcome-bubble" class="speech-bubble">
                 Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant in the bottom corner if you have any questions!           
@@ -31,7 +27,7 @@
           
             <a href="mailto:your@email.com" class="email-btn">Email me</a>
 
-            <div class="social-icons">
+            <div class="social-icons" style="margin-top: 25px;">
                 <a href="https://www.facebook.com/mjcore"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://ph.linkedin.com/in/mark-john-gonzalvo-6384b4149"><i class="fab fa-linkedin-in"></i></a>
                 <a href="#"><i class="fab fa-x-twitter"></i></a> 
@@ -47,24 +43,23 @@
                     data tasks, and AI projects. I’m adaptable, efficient, and keep everything 
                     organized, even when things get busy.
                 </p>
-                <div class="button-group">
+                <div class="button-group" style="display: flex; gap: 15px;">
                     <a href="assets/MJ_Gonzalvo_Resume.pdf" target="_blank" class="card-btn">Resume</a>
-                    <a href="#gallery-section" class="card-btn">Portfolio</a>
+                    <a href="#" class="card-btn" id="openPortfolio">Portfolio</a>
                 </div>
             </div>
         </section>
-        
     </div> 
 
     <div id="pfp-modal" class="modal">
-        <span class="close-modal">&times;</span>
-        <img class="modal-content" id="img-expanded">
+        <span class="close-modal" style="position: absolute; top: 20px; right: 30px; font-size: 40px; cursor: pointer;">&times;</span>
+        <img class="modal-content" id="img-expanded" style="max-width: 80%; border: 2px solid #00d4ff;">
     </div>
 
-    <div id="portfolio-album-modal" class="modal">
-        <span class="close-album" id="close-portfolio">&times;</span>
+    <div id="portfolio-modal" class="modal">
+        <span class="close-album" id="close-portfolio" style="position: absolute; top: 20px; right: 30px; font-size: 40px; cursor: pointer;">&times;</span>
         <div class="album-wrapper">
-            <div class="album-main">
+            <div class="album-main" style="display: flex; align-items: center; gap: 20px;">
                 <button id="prevBtn" class="nav-btn"><i class="fas fa-chevron-left"></i></button>
                 <img id="album-img" src="" alt="Achievement">
                 <button id="nextBtn" class="nav-btn"><i class="fas fa-chevron-right"></i></button>
@@ -76,96 +71,58 @@
     </div>
 
     <script>
-      window.chatbaseConfig = {
-        chatbotId: "aWn99QuaimyS0A8WuIJVn",
-        showFloatingInitialMessages: true, 
-        floatingInitialMessagesDelay: 3, 
-      };
-    </script>
-    <script src="https://www.chatbase.co/embed.min.js" id="aWn99QuaimyS0A8WuIJVn" defer></script>
-
-    <script>
-        // 1. Welcome Bubble Logic
+        // Welcome Bubble Fade Out
         window.addEventListener('load', function() {
             const bubble = document.getElementById('welcome-bubble');
             if (bubble) {
                 setTimeout(() => {
                     bubble.style.opacity = '0';
                     setTimeout(() => { bubble.style.display = 'none'; }, 1000); 
-                }, 15000); 
+                }, 10000); 
             }
         });
 
-        // 2. PFP Modal Logic (Existing)
-        document.addEventListener("DOMContentLoaded", function() {
-            const pfpModal = document.getElementById("pfp-modal");
-            const pfpImg = document.querySelector(".pfp-container img");
-            const modalImg = document.getElementById("img-expanded");
-            const closePfp = document.querySelector(".close-modal");
+        // Portfolio Data with YOUR full text
+        const myAchievements = [
+            { src: 'assets/cert1.jpg', desc: 'Awarded Top Agent for May 2025 in a Content Moderation account at Alorica for consistent quality and performance' },
+            { src: 'assets/cert2.jpg', desc: 'Awarded Top Agent for June 2025 in a Content Moderation account at Alorica for consistent quality and performance' },
+            { src: 'assets/cert3.jpg', desc: 'Awarded Top Agent for Q3 2017 in a Healthcare account as a Customer Service Representative at Concentrix for consistent quality and performance.' }
+        ];
 
-            if (pfpImg) {
-                pfpImg.onclick = function() {
-                    pfpModal.style.display = "flex";
-                    modalImg.src = this.src;
-                }
+        let currentIdx = 0;
+        const pModal = document.getElementById("pfp-modal");
+        const portModal = document.getElementById("portfolio-modal");
+        const albumImg = document.getElementById("album-img");
+        const albumText = document.getElementById("album-text");
+
+        document.querySelector(".pfp-container img").onclick = function() {
+            pModal.style.display = "flex";
+            document.getElementById("img-expanded").src = this.src;
+        };
+
+        document.getElementById("openPortfolio").onclick = function(e) {
+            e.preventDefault();
+            portModal.style.display = "flex";
+            updateView();
+        };
+
+        function updateView() {
+            albumImg.src = myAchievements[currentIdx].src;
+            albumText.innerText = myAchievements[currentIdx].desc;
+        }
+
+        document.getElementById("nextBtn").onclick = () => { currentIdx = (currentIdx + 1) % myAchievements.length; updateView(); };
+        document.getElementById("prevBtn").onclick = () => { currentIdx = (currentIdx - 1 + myAchievements.length) % myAchievements.length; updateView(); };
+        
+        document.querySelector(".close-modal").onclick = () => pModal.style.display = "none";
+        document.getElementById("close-portfolio").onclick = () => portModal.style.display = "none";
+
+        window.onclick = (e) => { 
+            if (e.target == pModal || e.target == portModal) {
+                pModal.style.display = "none";
+                portModal.style.display = "none";
             }
-            if (closePfp) closePfp.onclick = () => pfpModal.style.display = "none";
-            
-            // Global click closer for PFP
-            window.addEventListener("click", (e) => {
-                if (e.target == pfpModal) pfpModal.style.display = "none";
-            });
-        });
-
-        // 3. Portfolio Album Logic (New)
-        document.addEventListener("DOMContentLoaded", function() {
-            // EDIT YOUR ACHIEVEMENTS HERE:
-            const myAchievements = [
-                { src: 'assets/cert1.jpg', desc: 'Top Performer Award - Customer Support 2024' },
-                { src: 'assets/cert2.jpg', desc: 'Content Moderator Specialist Certification' },
-                { src: 'assets/cert3.jpg', desc: 'Advanced AI Data Training Project' }
-            ];
-
-            let currentIdx = 0;
-            const albumModal = document.getElementById("portfolio-album-modal");
-            const albumImg = document.getElementById("album-img");
-            const albumText = document.getElementById("album-text");
-            const portfolioBtn = document.querySelector('a[href="#gallery-section"]');
-
-            function updateView() {
-                if(myAchievements.length > 0) {
-                    albumImg.src = myAchievements[currentIdx].src;
-                    albumText.innerText = myAchievements[currentIdx].desc;
-                }
-            }
-
-            if (portfolioBtn) {
-                portfolioBtn.onclick = function(e) {
-                    e.preventDefault();
-                    albumModal.style.display = "flex";
-                    updateView();
-                }
-            }
-
-            document.getElementById("nextBtn").onclick = (e) => {
-                e.stopPropagation();
-                currentIdx = (currentIdx + 1) % myAchievements.length;
-                updateView();
-            };
-
-            document.getElementById("prevBtn").onclick = (e) => {
-                e.stopPropagation();
-                currentIdx = (currentIdx - 1 + myAchievements.length) % myAchievements.length;
-                updateView();
-            };
-
-            document.getElementById("close-portfolio").onclick = () => albumModal.style.display = "none";
-            
-            // Close on outer click
-            window.addEventListener("click", (e) => {
-                if (e.target == albumModal) albumModal.style.display = "none";
-            });
-        });
+        };
     </script>
 </body>
 </html>

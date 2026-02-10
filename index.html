@@ -3,140 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MJ Verse | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>MJ Verse</title>
+    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <div id="particles-js"></div>
+<div class="container">
+    <section class="profile-side">
+        <div class="speech-bubble">
+            Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant in the bottom corner if you have any questions!
+        </div>
+        
+        <div class="pfp-container">
+            <img src="assets/pfp.jpg" alt="Mark John Gonzalvo"> 
+        </div>
+        
+        <h1 class="glow-text">Mark John Gonzalvo</h1>
+        
+        <div class="titles-container">
+            <div class="titles-box">Customer Service</div>
+            <div class="titles-box">Content Moderator</div>
+            <div class="titles-box">Administrative Support</div>
+            <div class="titles-box">Freelancer</div>
+        </div>
 
-    <div class="container">
-        <section class="profile-side">
-            <div id="welcome-bubble" class="speech-bubble">
-                Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant in the bottom corner if you have any questions!
-            </div>
-            
-            <div class="pfp-container">
-                <img src="assets/pfp.jpg" id="pfp-trigger" alt="MJ">
-            </div>
-            
-            <h1 style="font-size: 2.2rem; text-shadow: 0 0 15px #00d4ff; margin: 15px 0;">Mark John Gonzalvo</h1>
-            
-            <div class="titles-container">
-                <div class="titles-box">Customer Service</div>
-                <div class="titles-box">Content Moderator</div>
-                <div class="titles-box">Administrative Support</div>
-                <div class="titles-box">Freelancer</div>
-            </div>
+        <a href="mailto:your@email.com" class="email-btn">Email me</a>
 
-            <a href="mailto:your@email.com" class="email-btn">Email me</a>
-            
-            <div style="display:flex; gap:20px; margin-top:20px;">
-                <a href="#" style="color:white; font-size:1.5rem;"><i class="fab fa-facebook"></i></a>
-                <a href="#" style="color:white; font-size:1.5rem;"><i class="fab fa-linkedin"></i></a>
-                <a href="#" style="color:white; font-size:1.5rem;"><i class="fab fa-x-twitter"></i></a>
-            </div>
-        </section>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-x-twitter"></i></a> 
+        </div>
+    </section>
 
-        <section class="about-side">
-            <div class="about-card">
-                <h2 style="color:#00d4ff; margin-bottom:15px; letter-spacing:1px;">PROFILE SUMMARY</h2>
-                <p style="line-height:1.6;">I’ve spent years in customer service and tech support, helping people through chat, calls, and emails. I also do content moderation, data tasks, and AI projects. I’m adaptable, efficient, and keep everything organized.</p>
-                <div style="display:flex; gap:15px; margin-top:25px;">
-                    <a href="assets/Resume.pdf" target="_blank" class="card-btn">Resume</a>
-                    <button class="card-btn" id="openPortfolio">Portfolio</button>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <div id="portfolio-modal" class="modal">
-        <span class="close-x" id="close-portfolio">&times;</span>
-        <div class="modal-content">
-            <div class="img-frame">
-                <img id="album-img" src="">
-            </div>
-            <div class="album-footer">
-                <p id="album-text" style="color:#00d4ff; font-size:14px;"></p>
-            </div>
-            <div class="nav-controls">
-                <button id="prevBtn" class="nav-btn">PREV</button>
-                <button id="nextBtn" class="nav-btn">NEXT</button>
+    <section class="about-side">
+        <div class="about-card">
+            <h2>PROFILE SUMMARY</h2>
+            <p>
+                I’ve spent years in customer service and tech support, helping people 
+                through chat, calls, and emails. I also do content moderation, data tasks, 
+                and AI projects. I’m adaptable, efficient, and keep everything organized, 
+                even when things get busy.
+            </p>
+            <div class="button-group">
+                <a href="assets/Resume.pdf" target="_blank" class="card-btn">Resume</a>
+                <a href="#" class="card-btn" id="openPortfolio">Portfolio</a>
             </div>
         </div>
+    </section>
+</div>
+
+<div id="portfolio-modal" class="modal">
+    <div class="modal-content">
+        <span id="close-portfolio" style="align-self: flex-end; cursor: pointer; font-size: 40px; margin-bottom: 10px;">&times;</span>
+        <img id="album-img" src="">
+        <div class="album-footer">
+            <p id="album-text"></p>
+        </div>
+        <div style="margin-top: 20px; display: flex; gap: 20px;">
+            <button id="prevBtn" class="card-btn">Previous</button>
+            <button id="nextBtn" class="card-btn">Next</button>
+        </div>
     </div>
+</div>
 
-    <div id="pfp-modal" class="modal">
-        <span class="close-x" id="close-pfp">&times;</span>
-        <img src="assets/pfp.jpg" style="max-width:80%; border:3px solid #00d4ff; border-radius:20px; box-shadow:0 0 50px #00d4ff;">
-    </div>
+<script>
+    const myAchievements = [
+        { src: 'assets/cert1.jpg', desc: 'Top Performer Award - Customer Support 2024' },
+        { src: 'assets/cert2.jpg', desc: 'Movie Anchor Library Top 3 Agent - May 2025' }
+    ];
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        /* 1. ATMOSPHERIC PARTICLE ENGINE */
-        particlesJS("particles-js", {
-          "particles": {
-            "number": { "value": 150, "density": { "enable": true, "value_area": 800 } },
-            "color": { "value": "#ffffff" },
-            "shape": { "type": "circle" },
-            "opacity": { 
-                "value": 0.8, 
-                "random": true, 
-                "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } 
-            },
-            "size": { 
-                "value": 2, 
-                "random": true, 
-                "anim": { "enable": true, "speed": 2, "size_min": 0.1, "sync": false } 
-            },
-            "line_linked": { "enable": false },
-            "move": { 
-                "enable": true, 
-                "speed": 4, /* Speed for "Shooting Star" feel */
-                "direction": "bottom-left", 
-                "random": false, 
-                "straight": true, 
-                "out_mode": "out" 
-            }
-          },
-          "interactivity": {
-            "events": { "onhover": { "enable": true, "mode": "bubble" } },
-            "modes": { "bubble": { "distance": 200, "size": 0, "duration": 2, "opacity": 0 } }
-          }
-        });
+    let currentIdx = 0;
+    const modal = document.getElementById("portfolio-modal");
 
-        /* 2. CLOUD VANISH (20 SECONDS) */
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                const bubble = document.getElementById('welcome-bubble');
-                if(bubble) bubble.classList.add('fade-out');
-            }, 20000);
-        });
+    document.getElementById("openPortfolio").onclick = (e) => {
+        e.preventDefault();
+        modal.style.display = "flex";
+        updateView();
+    };
 
-        /* 3. PORTFOLIO LOGIC */
-        const achievements = [
-            { src: 'assets/cert1.jpg', desc: 'Top Performer Award - Customer Support 2024' },
-            { src: 'assets/cert2.jpg', desc: 'Movie Anchor Library Top 3 Agent - June 2025' }
-        ];
-        let idx = 0;
-        const pModal = document.getElementById("portfolio-modal");
-        
-        document.getElementById("openPortfolio").onclick = () => { pModal.style.display = "flex"; update(); };
-        document.getElementById("close-portfolio").onclick = () => pModal.style.display = "none";
-        
-        function update() {
-            document.getElementById("album-img").src = achievements[idx].src;
-            document.getElementById("album-text").innerText = achievements[idx].desc;
-        }
+    function updateView() {
+        document.getElementById("album-img").src = myAchievements[currentIdx].src;
+        document.getElementById("album-text").innerText = myAchievements[currentIdx].desc;
+    }
 
-        document.getElementById("nextBtn").onclick = () => { idx = (idx + 1) % achievements.length; update(); };
-        document.getElementById("prevBtn").onclick = () => { idx = (idx - 1 + achievements.length) % achievements.length; update(); };
+    document.getElementById("nextBtn").onclick = () => { currentIdx = (currentIdx + 1) % myAchievements.length; updateView(); };
+    document.getElementById("prevBtn").onclick = () => { currentIdx = (currentIdx - 1 + myAchievements.length) % myAchievements.length; updateView(); };
+    document.getElementById("close-portfolio").onclick = () => modal.style.display = "none";
+</script>
 
-        /* 4. PFP ZOOM */
-        const pfpM = document.getElementById("pfp-modal");
-        document.getElementById("pfp-trigger").onclick = () => pfpM.style.display = "flex";
-        document.getElementById("close-pfp").onclick = () => pfpM.style.display = "none";
-    </script>
 </body>
 </html>

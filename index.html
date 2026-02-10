@@ -49,7 +49,7 @@
                 </p>
                 <div class="button-group">
                     <a href="assets/MJ_Gonzalvo_Resume.pdf" target="_blank" class="card-btn">Resume</a>
-                    <a href="#gallery-section" class="card-btn" id="openPortfolio">Portfolio</a>
+                    <a href="#gallery-section" class="card-btn">Portfolio</a>
                 </div>
             </div>
         </section>
@@ -61,10 +61,12 @@
         <img class="modal-content" id="img-expanded">
     </div>
 
-    <div id="portfolio-modal" class="modal">
+    <div id="portfolio-album-modal" class="modal">
         <span class="close-album" id="close-portfolio">&times;</span>
         <div class="album-wrapper">
             <div class="album-main">
+                <div id="album-loader" class="loader"></div> 
+
                 <button id="prevBtn" class="nav-btn"><i class="fas fa-chevron-left"></i></button>
                 <img id="album-img" src="" alt="Achievement">
                 <button id="nextBtn" class="nav-btn"><i class="fas fa-chevron-right"></i></button>
@@ -76,7 +78,16 @@
     </div>
 
     <script>
-        // 1. Welcome Bubble Logic
+      window.chatbaseConfig = {
+        chatbotId: "aWn99QuaimyS0A8WuIJVn",
+        showFloatingInitialMessages: true, 
+        floatingInitialMessagesDelay: 3, 
+      };
+    </script>
+    <script src="https://www.chatbase.co/embed.min.js" id="aWn99QuaimyS0A8WuIJVn" defer></script>
+
+    <script>
+        // 1. Welcome Bubble
         window.addEventListener('load', function() {
             const bubble = document.getElementById('welcome-bubble');
             if (bubble) {
@@ -87,47 +98,83 @@
             }
         });
 
-        // 2. Portfolio Logic (Restored full descriptions)
-        const myAchievements = [
-            { src: 'assets/cert1.jpg', desc: 'Awarded Top Agent for May 2025 in a Content Moderation account at Alorica for consistent quality and performance' },
-            { src: 'assets/cert2.jpg', desc: 'Awarded Top Agent for June 2025 in a Content Moderation account at Alorica for consistent quality and performance' },
-            { src: 'assets/cert3.jpg', desc: 'Awarded Top Agent for Q3 2017 in a Healthcare account as a Customer Service Representative at Concentrix for consistent quality and performance.' }
-        ];
+        // 2. PFP Modal
+        document.addEventListener("DOMContentLoaded", function() {
+            const pfpModal = document.getElementById("pfp-modal");
+            const pfpImg = document.querySelector(".pfp-container img");
+            const modalImg = document.getElementById("img-expanded");
+            const closePfp = document.querySelector(".close-modal");
 
-        let currentIdx = 0;
-        const pModal = document.getElementById("pfp-modal");
-        const portModal = document.getElementById("portfolio-modal");
-        const albumImg = document.getElementById("album-img");
-        const albumText = document.getElementById("album-text");
+            if (pfpImg) {
+                pfpImg.onclick = function() {
+                    pfpModal.style.display = "flex";
+                    modalImg.src = this.src;
+                }
+            }
+            if (closePfp) closePfp.onclick = () => pfpModal.style.display = "none";
+            window.addEventListener("click", (e) => {
+                if (e.target == pfpModal) pfpModal.style.display = "none";
+            });
+        });
 
-        // PFP Modal
-        document.querySelector(".pfp-container img").onclick = function() {
-            pModal.style.display = "flex";
-            document.getElementById("img-expanded").src = this.src;
-        }
+        // 3. Portfolio Album Logic with Loader
+        document.addEventListener("DOMContentLoaded", function() {
+            const myAchievements = [
+                { src: 'assets/cert1.jpg', desc: 'Top Performer Award - Customer Support 2024' },
+                { src: 'assets/cert2.jpg', desc: 'Content Moderator Specialist Certification' },
+                { src: 'assets/cert3.jpg', desc: 'Advanced AI Data Training Project' }
+            ];
 
-        // Portfolio Modal
-        document.getElementById("openPortfolio").onclick = function(e) {
-            e.preventDefault();
-            portModal.style.display = "flex";
-            updateView();
-        }
+            let currentIdx = 0;
+            const albumModal = document.getElementById("portfolio-album-modal");
+            const albumImg = document.getElementById("album-img");
+            const albumText = document.getElementById("album-text");
+            const loader = document.getElementById("album-loader");
+            const portfolioBtn = document.querySelector('a[href="#gallery-section"]');
 
-        function updateView() {
-            albumImg.src = myAchievements[currentIdx].src;
-            albumText.innerText = myAchievements[currentIdx].desc;
-        }
+            function updateView() {
+                if(myAchievements.length > 0) {
+                    // Show loader and hide image while loading
+                    loader.style.display = "block";
+                    albumImg.style.opacity = "0";
 
-        document.getElementById("nextBtn").onclick = () => { currentIdx = (currentIdx + 1) % myAchievements.length; updateView(); };
-        document.getElementById("prevBtn").onclick = () => { currentIdx = (currentIdx - 1 + myAchievements.length) % myAchievements.length; updateView(); };
-        
-        document.querySelector(".close-modal").onclick = () => pModal.style.display = "none";
-        document.getElementById("close-portfolio").onclick = () => portModal.style.display = "none";
+                    albumImg.src = myAchievements[currentIdx].src;
+                    albumText.innerText = myAchievements[currentIdx].desc;
 
-        window.onclick = (e) => { 
-            if (e.target == pModal) pModal.style.display = "none";
-            if (e.target == portModal) portModal.style.display = "none";
-        }
+                    // Hide loader when image is ready
+                    albumImg.onload = function() {
+                        loader.style.display = "none";
+                        albumImg.style.opacity = "1";
+                    };
+                }
+            }
+
+            if (portfolioBtn) {
+                portfolioBtn.onclick = function(e) {
+                    e.preventDefault();
+                    albumModal.style.display = "flex";
+                    updateView();
+                }
+            }
+
+            document.getElementById("nextBtn").onclick = (e) => {
+                e.stopPropagation();
+                currentIdx = (currentIdx + 1) % myAchievements.length;
+                updateView();
+            };
+
+            document.getElementById("prevBtn").onclick = (e) => {
+                e.stopPropagation();
+                currentIdx = (currentIdx - 1 + myAchievements.length) % myAchievements.length;
+                updateView();
+            };
+
+            document.getElementById("close-portfolio").onclick = () => albumModal.style.display = "none";
+            
+            window.addEventListener("click", (e) => {
+                if (e.target == albumModal) albumModal.style.display = "none";
+            });
+        });
     </script>
 </body>
 </html>

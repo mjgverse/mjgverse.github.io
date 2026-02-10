@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MJ Verse</title>
-    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+<div id="particles-js"></div>
 
 <div class="container">
     <section class="profile-side">
-        <div class="speech-bubble">
-            Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant in the bottom corner if you have any questions!
-        </div>
+        <div class="speech-bubble">Hi, MJ here! Welcome to my space site...</div>
         
         <div class="pfp-container">
-            <img src="assets/pfp.jpg" alt="Mark John Gonzalvo"> 
+            <img src="assets/pfp.jpg" id="pfp-trigger" style="cursor: zoom-in;" alt="MJ">
         </div>
         
         <h1 class="glow-text">Mark John Gonzalvo</h1>
@@ -26,25 +16,13 @@
             <div class="titles-box">Administrative Support</div>
             <div class="titles-box">Freelancer</div>
         </div>
-
         <a href="mailto:your@email.com" class="email-btn">Email me</a>
-
-        <div class="social-icons">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-x-twitter"></i></a> 
-        </div>
     </section>
 
     <section class="about-side">
         <div class="about-card">
             <h2>PROFILE SUMMARY</h2>
-            <p>
-                I’ve spent years in customer service and tech support, helping people 
-                through chat, calls, and emails. I also do content moderation, data tasks, 
-                and AI projects. I’m adaptable, efficient, and keep everything organized, 
-                even when things get busy.
-            </p>
+            <p>I’ve spent years in customer service and tech support...</p>
             <div class="button-group">
                 <a href="assets/Resume.pdf" target="_blank" class="card-btn">Resume</a>
                 <a href="#" class="card-btn" id="openPortfolio">Portfolio</a>
@@ -53,44 +31,38 @@
     </section>
 </div>
 
-<div id="portfolio-modal" class="modal">
+<div id="pfp-modal" class="modal">
     <div class="modal-content">
-        <span id="close-portfolio" style="align-self: flex-end; cursor: pointer; font-size: 40px; margin-bottom: 10px;">&times;</span>
-        <img id="album-img" src="">
-        <div class="album-footer">
-            <p id="album-text"></p>
-        </div>
-        <div style="margin-top: 20px; display: flex; gap: 20px;">
-            <button id="prevBtn" class="card-btn">Previous</button>
-            <button id="nextBtn" class="card-btn">Next</button>
-        </div>
+        <span id="close-pfp" class="close-btn">&times;</span>
+        <img src="assets/pfp.jpg" class="zoomed-pfp">
     </div>
 </div>
 
+<div id="portfolio-modal" class="modal">
+    </div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
-    const myAchievements = [
-        { src: 'assets/cert1.jpg', desc: 'Top Performer Award - Customer Support 2024' },
-        { src: 'assets/cert2.jpg', desc: 'Movie Anchor Library Top 3 Agent - May 2025' }
-    ];
+    /* 1. METEOR & STAR MOTION */
+    particlesJS("particles-js", {
+        "particles": {
+            "number": { "value": 100 },
+            "move": { 
+                "enable": true, 
+                "speed": 2, 
+                "direction": "bottom-left", /* METEOR DIRECTION */
+                "straight": true 
+            },
+            "size": { "value": 2, "random": true },
+            "opacity": { "anim": { "enable": true, "speed": 1, "opacity_min": 0.1 } }
+        }
+    });
 
-    let currentIdx = 0;
-    const modal = document.getElementById("portfolio-modal");
+    /* 2. PFP ZOOM LOGIC */
+    const pfpModal = document.getElementById("pfp-modal");
+    document.getElementById("pfp-trigger").onclick = () => pfpModal.style.display = "flex";
+    document.getElementById("close-pfp").onclick = () => pfpModal.style.display = "none";
 
-    document.getElementById("openPortfolio").onclick = (e) => {
-        e.preventDefault();
-        modal.style.display = "flex";
-        updateView();
-    };
-
-    function updateView() {
-        document.getElementById("album-img").src = myAchievements[currentIdx].src;
-        document.getElementById("album-text").innerText = myAchievements[currentIdx].desc;
-    }
-
-    document.getElementById("nextBtn").onclick = () => { currentIdx = (currentIdx + 1) % myAchievements.length; updateView(); };
-    document.getElementById("prevBtn").onclick = () => { currentIdx = (currentIdx - 1 + myAchievements.length) % myAchievements.length; updateView(); };
-    document.getElementById("close-portfolio").onclick = () => modal.style.display = "none";
+    /* 3. PORTFOLIO LOGIC */
+    // ... (Your portfolio next/prev code goes here)
 </script>
-
-</body>
-</html>

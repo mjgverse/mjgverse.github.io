@@ -1,11 +1,18 @@
 /* --- BASE SETUP --- */
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-body { 
-    background: url('assets/bg.jpg') no-repeat center center fixed; 
-    background-size: cover; 
-    color: white; 
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+
+body {
+    background: url('assets/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
     min-height: 100vh;
-    overflow-x: hidden; 
+    overflow-x: hidden;
+    background-color: #050505; /* Fallback color so it's not white */
 }
 
 .container {
@@ -17,6 +24,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
+    position: relative;
+    z-index: 1;
 }
 
 /* --- LEFT SIDE: PROFILE --- */
@@ -24,7 +33,7 @@ body {
     flex: 0 0 320px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* THIS CENTERS THE LABELS UNDER THE NAME */
+    align-items: center;
     text-align: center;
 }
 
@@ -52,10 +61,21 @@ body {
     border-top: 10px solid rgba(0, 0, 0, 0.75);
 }
 
+/* PFP CONTAINER & HOVER POP */
 .pfp-container img {
-    width: 170px; height: 170px; border-radius: 50%;
+    width: 170px; 
+    height: 170px; 
+    border-radius: 50%;
     border: 3px solid #00d4ff; 
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: zoom-in;
+    object-fit: cover;
+}
+
+.pfp-container img:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 35px rgba(0, 212, 255, 0.8);
 }
 
 .glow-text {
@@ -68,7 +88,7 @@ body {
 .titles-container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Keeps them in a neat vertical line */
+    align-items: center;
     gap: 8px;
     margin-bottom: 20px;
 }
@@ -79,10 +99,11 @@ body {
     border: 1px solid rgba(0, 212, 255, 0.3);
     border-radius: 6px;
     padding: 6px 0;
-    width: 190px; /* Locked width to prevent stretching */
+    width: 190px;
     color: #00d4ff;
     font-size: 13px;
     transition: 0.3s;
+    text-align: center;
 }
 
 .titles-box:hover {
@@ -92,9 +113,10 @@ body {
 
 /* --- RIGHT SIDE: PROFILE SUMMARY --- */
 .about-side { flex: 0 1 550px; }
+
 .about-card {
     background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(25px); /* THE GLASS STYLE */
+    backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 40px;
     border-radius: 25px;
@@ -106,6 +128,7 @@ body {
 
 /* BUTTONS & HOVERS */
 .button-group { display: flex; gap: 15px; }
+
 .card-btn, .email-btn {
     text-decoration: none;
     color: white;
@@ -115,6 +138,7 @@ body {
     background: rgba(0, 212, 255, 0.1);
     transition: 0.3s;
     font-size: 14px;
+    display: inline-block;
 }
 
 .email-btn { background: #00d4ff; color: black; font-weight: bold; }
@@ -130,64 +154,24 @@ body {
 .social-icons a { color: white; font-size: 1.5rem; transition: 0.3s; }
 .social-icons a:hover { color: #00d4ff; transform: scale(1.15); }
 
-/* --- MODAL SYSTEM: PREVENTS IMAGES FROM DUMPING AT BOTTOM --- */
+/* --- MODAL SYSTEM --- */
 .modal {
     display: none; 
     position: fixed; 
     z-index: 9999;
     left: 0; top: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.96);
-    justify-content: center; align-items: center;
+    justify-content: center; 
+    align-items: center;
 }
 
 .modal-content {
-    display: flex; flex-direction: column; align-items: center;
-    width: 90%; max-width: 800px;
-}
-
-#album-img {
-    max-width: 100%; max-height: 75vh;
-    border: 2px solid #00d4ff; border-radius: 10px;
-    box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
-}
-
-.album-footer {
-    background: rgba(0,0,0,0.8); padding: 15px; margin-top: 15px;
-    border-bottom: 3px solid #00d4ff; width: 100%; text-align: center;
-}
-
-/* MOBILE FIX */
-@media (max-width: 850px) {
-    .container { flex-direction: column; text-align: center; }
-}
-
-
-/* --- PFP HOVER POP EFFECT --- */
-.pfp-container img {
-    width: 170px; 
-    height: 170px; 
-    border-radius: 50%;
-    border: 3px solid #00d4ff; 
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth motion */
-    cursor: zoom-in;
-}
-
-/* The "Pop" when hovering */
-.pfp-container img:hover {
-    transform: scale(1.08); /* Slight pop up */
-    box-shadow: 0 0 30px rgba(0, 212, 255, 0.7); /* Intensified glow */
-}
-
-/* --- LIGHTBOX (ZOOM) MODAL --- */
-.modal {
-    display: none; 
-    position: fixed; 
-    z-index: 10000;
-    left: 0; top: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    justify-content: center; 
+    display: flex; 
+    flex-direction: column; 
     align-items: center;
+    width: 90%; 
+    max-width: 800px;
+    position: relative;
 }
 
 .zoomed-pfp {
@@ -195,7 +179,7 @@ body {
     max-height: 85vh;
     border-radius: 15px;
     border: 3px solid #00d4ff;
-    animation: zoomIn 0.3s ease; /* Smooth entrance */
+    animation: zoomIn 0.3s ease;
 }
 
 @keyframes zoomIn {
@@ -205,9 +189,15 @@ body {
 
 .close-btn {
     position: absolute;
-    top: 30px;
-    right: 40px;
+    top: -50px;
+    right: 0;
     font-size: 50px;
     color: white;
     cursor: pointer;
+}
+
+/* MOBILE FIX */
+@media (max-width: 850px) {
+    .container { flex-direction: column; text-align: center; gap: 30px; }
+    .about-side { flex: 1; width: 100%; }
 }

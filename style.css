@@ -1,14 +1,13 @@
 /* --- 1. BASE SETUP --- */
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 
 body {
-    /* CLEAN STATIC BACKGROUND */
+    /* RESTORING YOUR BG IMAGE */
     background: url('assets/bg.jpg') no-repeat center center fixed;
     background-size: cover;
     color: white;
     min-height: 100vh;
     overflow-x: hidden;
-    background-color: #050505; /* Fallback for slow loading */
 }
 
 .container {
@@ -16,25 +15,26 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 60px;
-    max-width: 1200px;
+    gap: 40px;
+    padding: 40px;
+    max-width: 1300px;
     margin: 0 auto;
-    padding: 40px 20px;
 }
 
-/* --- 2. PROFILE & CLOUD --- */
-.profile-side { flex: 0 0 320px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+/* --- 2. PROFILE SIDE --- */
+.profile-side { flex: 0 0 400px; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
+/* THE CLOUD */
 .speech-bubble {
     position: relative;
     background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(10px);
     padding: 15px;
     border-radius: 15px;
     font-size: 13px;
-    margin-bottom: 25px;
-    border: 1px solid rgba(0, 212, 255, 0.4);
-    max-width: 260px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    max-width: 280px;
     transition: opacity 1.5s ease, transform 1.5s ease;
 }
 
@@ -44,75 +44,96 @@ body {
     border-right: 10px solid transparent; border-top: 10px solid rgba(0, 0, 0, 0.8);
 }
 
-.fade-out {
-    opacity: 0 !important;
-    transform: translateY(-20px) !important;
-    visibility: hidden !important;
-}
+.fade-out { opacity: 0 !important; transform: translateY(-20px) !important; visibility: hidden !important; }
 
-/* PFP POP EFFECT */
+/* PFP */
 .pfp-container img {
-    width: 170px; height: 170px; border-radius: 50%;
+    width: 180px; height: 180px; border-radius: 50%;
     border: 3px solid #00d4ff; 
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: zoom-in;
+    transition: 0.3s; cursor: zoom-in;
 }
-.pfp-container img:hover { transform: scale(1.1); box-shadow: 0 0 35px #00d4ff; }
+.pfp-container img:hover { transform: scale(1.05); box-shadow: 0 0 35px #00d4ff; }
 
-/* LABELS */
-.titles-container { display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 20px 0; }
+/* NAME (STAYS STRAIGHT) */
+.glow-name {
+    font-size: 2.2rem;
+    white-space: nowrap; /* Forces name to stay on one line */
+    text-shadow: 0 0 15px #00d4ff;
+    margin: 15px 0;
+    color: #fff;
+}
+
+.titles-container { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
 .titles-box {
     background: rgba(0, 212, 255, 0.1); border: 1px solid rgba(0, 212, 255, 0.4);
-    border-radius: 6px; padding: 6px 0; width: 200px; color: #00d4ff; font-size: 13px; text-align: center;
+    border-radius: 6px; padding: 6px 0; width: 220px; color: #00d4ff; font-size: 13px;
 }
 
-/* --- 3. SUMMARY CARD --- */
+/* --- 3. SUMMARY BOX (NOT WIDE) --- */
+.about-side { flex: 0 1 450px; } /* Limits the width of the box */
+
 .about-card {
-    background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(25px);
-    border: 1px solid rgba(255, 255, 255, 0.1); padding: 40px;
-    border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.card-btn, .email-btn {
-    text-decoration: none; color: white; border: 1px solid #00d4ff;
-    padding: 12px 25px; border-radius: 8px; background: rgba(0, 212, 255, 0.1);
-    transition: 0.3s; font-size: 14px; cursor: pointer; display: inline-block;
+.about-card p {
+    line-height: 1.8;
+    font-size: 15px;
+    color: #e0e0e0;
+    text-align: left;
 }
-.card-btn:hover { background: #00d4ff; color: black; box-shadow: 0 0 20px #00d4ff; }
-.email-btn { background: #00d4ff; color: black; font-weight: bold; }
 
-/* --- 4. PORTFOLIO MODAL (VISIBLE AT 100% ZOOM) --- */
+/* --- 4. GLOWING SOCIALS & BUTTONS --- */
+.social-icons { display: flex; gap: 25px; margin-top: 25px; }
+.social-icons a { 
+    color: white; 
+    font-size: 1.6rem; 
+    transition: 0.3s; 
+    filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.3));
+}
+.social-icons a:hover { 
+    color: #00d4ff; 
+    transform: translateY(-5px); 
+    filter: drop-shadow(0 0 15px #00d4ff); 
+}
+
+.email-btn {
+    display: inline-block;
+    background: #00d4ff;
+    color: black;
+    font-weight: bold;
+    padding: 12px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+}
+.email-btn:hover { box-shadow: 0 0 25px #00d4ff; transform: scale(1.05); }
+
+/* --- 5. PORTFOLIO MODAL --- */
 .modal {
     display: none; position: fixed; z-index: 10000;
     left: 0; top: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.96);
+    background: rgba(0, 0, 0, 0.95);
     justify-content: center; align-items: center;
 }
-
 .modal-content {
+    background: #111; padding: 25px; border-radius: 15px;
+    border: 2px solid #00d4ff; width: 90%; max-width: 500px;
     display: flex; flex-direction: column; align-items: center;
-    width: 90%; max-width: 500px; /* Slimmer for better fit */
-    padding: 20px; background: rgba(10, 10, 10, 0.9);
-    border-radius: 20px; border: 2px solid #00d4ff;
 }
+.img-frame { width: 100%; max-height: 40vh; border-radius: 8px; overflow: hidden; margin-bottom: 20px; border: 1px solid #00d4ff; }
+#album-img { width: 100%; display: block; }
 
-.img-frame {
-    width: 100%; max-height: 40vh; /* Keeps image small enough to see buttons */
-    border: 2px solid #00d4ff; border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
-    overflow: hidden; margin-bottom: 15px;
-}
-
-#album-img { width: 100%; height: auto; display: block; object-fit: contain; }
-
-.nav-controls { display: flex; gap: 15px; }
 .nav-btn {
     background: transparent; color: #00d4ff; border: 2px solid #00d4ff;
-    padding: 10px 25px; border-radius: 30px; cursor: pointer;
-    font-weight: bold; transition: 0.3s;
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+    padding: 8px 25px; border-radius: 20px; cursor: pointer; font-weight: bold;
+    transition: 0.3s; box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
 }
-.nav-btn:hover { background: #00d4ff; color: black; box-shadow: 0 0 25px #00d4ff; }
-
-.close-x { position: absolute; top: 20px; right: 30px; font-size: 45px; color: white; cursor: pointer; }
+.nav-btn:hover { background: #00d4ff; color: black; box-shadow: 0 0 20px #00d4ff; }

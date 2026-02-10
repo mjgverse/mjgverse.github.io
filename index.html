@@ -9,10 +9,6 @@
 </head>
 <body>
 
-    <div class="space-overlay">
-        <div class="stars-twinkle"></div>
-    </div>
-    
     <div class="container">
         <section class="profile-side">
             <div id="welcome-bubble" class="speech-bubble">
@@ -20,16 +16,22 @@
             </div>
             
             <div class="pfp-container">
-                <img src="assets/pfp.jpg" alt="Mark John Gonzalvo"> 
+                <img src="assets/pfp.jpg" alt="Mark John" id="pfp-trigger"> 
             </div>
             <h1>Mark John Gonzalvo</h1>
-            <p class="titles">Customer Service<br>Content Moderator<br>Administrative Support<br>Freelancer</p>
-          
+            
+            <div class="titles-container">
+                <p class="titles">Customer Service</p>
+                <p class="titles">Content Moderator</p>
+                <p class="titles">Administrative Support</p>
+                <p class="titles">Freelancer</p>
+            </div>
+
             <a href="mailto:your@email.com" class="email-btn">Email me</a>
 
-            <div class="social-icons" style="margin-top: 25px;">
-                <a href="https://www.facebook.com/mjcore"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://ph.linkedin.com/in/mark-john-gonzalvo-6384b4149"><i class="fab fa-linkedin-in"></i></a>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 <a href="#"><i class="fab fa-x-twitter"></i></a> 
             </div>
         </section>
@@ -43,25 +45,25 @@
                     data tasks, and AI projects. I’m adaptable, efficient, and keep everything 
                     organized, even when things get busy.
                 </p>
-                <div class="button-group" style="display: flex; gap: 15px;">
-                    <a href="assets/MJ_Gonzalvo_Resume.pdf" target="_blank" class="card-btn">Resume</a>
+                <div class="button-group">
+                    <a href="#" class="card-btn">Resume</a>
                     <a href="#" class="card-btn" id="openPortfolio">Portfolio</a>
                 </div>
             </div>
         </section>
-    </div> 
+    </div>
 
     <div id="pfp-modal" class="modal">
-        <span class="close-modal" style="position: absolute; top: 20px; right: 30px; font-size: 40px; cursor: pointer;">&times;</span>
-        <img class="modal-content" id="img-expanded" style="max-width: 80%; border: 2px solid #00d4ff;">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="img-expanded">
     </div>
 
     <div id="portfolio-modal" class="modal">
-        <span class="close-album" id="close-portfolio" style="position: absolute; top: 20px; right: 30px; font-size: 40px; cursor: pointer;">&times;</span>
-        <div class="album-wrapper">
-            <div class="album-main" style="display: flex; align-items: center; gap: 20px;">
+        <span class="close-album" id="close-portfolio">&times;</span>
+        <div class="album-wrapper" style="display:flex; flex-direction:column; align-items:center;">
+            <div class="album-main" style="display:flex; align-items:center; gap:20px;">
                 <button id="prevBtn" class="nav-btn"><i class="fas fa-chevron-left"></i></button>
-                <img id="album-img" src="" alt="Achievement">
+                <img id="album-img" class="modal-content" src="">
                 <button id="nextBtn" class="nav-btn"><i class="fas fa-chevron-right"></i></button>
             </div>
             <div class="album-footer">
@@ -71,35 +73,23 @@
     </div>
 
     <script>
-        // Welcome Bubble Fade Out
-        window.addEventListener('load', function() {
-            const bubble = document.getElementById('welcome-bubble');
-            if (bubble) {
-                setTimeout(() => {
-                    bubble.style.opacity = '0';
-                    setTimeout(() => { bubble.style.display = 'none'; }, 1000); 
-                }, 10000); 
-            }
-        });
-
-        // Portfolio Data with YOUR full text
         const myAchievements = [
             { src: 'assets/cert1.jpg', desc: 'Awarded Top Agent for May 2025 in a Content Moderation account at Alorica for consistent quality and performance' },
             { src: 'assets/cert2.jpg', desc: 'Awarded Top Agent for June 2025 in a Content Moderation account at Alorica for consistent quality and performance' },
-            { src: 'assets/cert3.jpg', desc: 'Awarded Top Agent for Q3 2017 in a Healthcare account as a Customer Service Representative at Concentrix for consistent quality and performance.' }
+            { src: 'assets/cert3.jpg', desc: 'Awarded Top Agent for Q3 2017 in a Healthcare account at Concentrix.' }
         ];
 
         let currentIdx = 0;
         const pModal = document.getElementById("pfp-modal");
         const portModal = document.getElementById("portfolio-modal");
-        const albumImg = document.getElementById("album-img");
-        const albumText = document.getElementById("album-text");
 
-        document.querySelector(".pfp-container img").onclick = function() {
+        // PFP Modal Fix
+        document.getElementById("pfp-trigger").onclick = function() {
             pModal.style.display = "flex";
             document.getElementById("img-expanded").src = this.src;
         };
 
+        // Portfolio Modal
         document.getElementById("openPortfolio").onclick = function(e) {
             e.preventDefault();
             portModal.style.display = "flex";
@@ -107,8 +97,8 @@
         };
 
         function updateView() {
-            albumImg.src = myAchievements[currentIdx].src;
-            albumText.innerText = myAchievements[currentIdx].desc;
+            document.getElementById("album-img").src = myAchievements[currentIdx].src;
+            document.getElementById("album-text").innerText = myAchievements[currentIdx].desc;
         }
 
         document.getElementById("nextBtn").onclick = () => { currentIdx = (currentIdx + 1) % myAchievements.length; updateView(); };
@@ -116,13 +106,6 @@
         
         document.querySelector(".close-modal").onclick = () => pModal.style.display = "none";
         document.getElementById("close-portfolio").onclick = () => portModal.style.display = "none";
-
-        window.onclick = (e) => { 
-            if (e.target == pModal || e.target == portModal) {
-                pModal.style.display = "none";
-                portModal.style.display = "none";
-            }
-        };
     </script>
 </body>
 </html>

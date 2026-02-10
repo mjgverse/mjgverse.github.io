@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mark John Gonzalvo | Portfolio</title>
+    
     <link rel="stylesheet" href="style.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -30,10 +32,10 @@
 
             <h1>Mark John Gonzalvo</h1>
             
-            <p class="titles">
+            <div class="titles-cloud">
                 Customer Service • Content Moderator<br>
                 Administrative Support • Freelancer
-            </p>
+            </div>
           
             <a href="mailto:your-email@example.com" class="email-btn">Email me</a>
 
@@ -92,7 +94,7 @@
     <script src="https://www.chatbase.co/embed.min.js" id="aWn99QuaimyS0A8WuIJVn" defer></script>
 
     <script>
-        // 1. Bubble Fade Out
+        // 1. Bubble Fade Logic
         window.addEventListener('load', function() {
             const bubble = document.getElementById('welcome-bubble');
             if (bubble) {
@@ -103,19 +105,19 @@
             }
         });
 
-        // 2. Profile Picture Modal Logic
-        const pfpModal = document.getElementById("pfp-modal");
-        const pfpImg = document.querySelector(".pfp-container img");
-        const modalImg = document.getElementById("img-expanded");
-        const closePfp = document.querySelector(".close-modal");
+        // 2. Profile Pic Magnify Logic
+        const pModal = document.getElementById("pfp-modal");
+        const pImg = document.querySelector(".pfp-container img");
+        const expImg = document.getElementById("img-expanded");
+        const cBtn = document.querySelector(".close-modal");
 
-        if (pfpImg) {
-            pfpImg.onclick = function() {
-                pfpModal.style.display = "flex";
-                modalImg.src = this.src;
+        if (pImg) {
+            pImg.onclick = function() {
+                pModal.style.display = "flex";
+                expImg.src = this.src;
             }
         }
-        if (closePfp) closePfp.onclick = () => pfpModal.style.display = "none";
+        if (cBtn) cBtn.onclick = () => pModal.style.display = "none";
 
         // 3. Portfolio Modal Logic
         let currentSlide = 0;
@@ -129,34 +131,24 @@
             document.getElementById("portfolio-modal").style.display = "flex";
             updateSlide();
         }
-
         function closePortfolio() {
             document.getElementById("portfolio-modal").style.display = "none";
         }
-
-        function changeSlide(direction) {
-            currentSlide += direction;
+        function changeSlide(dir) {
+            currentSlide += dir;
             if (currentSlide >= certs.length) currentSlide = 0;
             if (currentSlide < 0) currentSlide = certs.length - 1;
             updateSlide();
         }
-
         function updateSlide() {
             document.getElementById("portfolio-img").src = certs[currentSlide].src;
             document.getElementById("cert-text").innerText = certs[currentSlide].desc;
         }
 
-        // 4. Unified "Click Outside to Close" Logic
-        window.onclick = function(event) {
-            const portModal = document.getElementById("portfolio-modal");
-            const pModal = document.getElementById("pfp-modal");
-            
-            if (event.target == portModal) {
-                closePortfolio();
-            }
-            if (event.target == pModal) {
-                pModal.style.display = "none";
-            }
+        // 4. Global Outside Click (Closes both modals)
+        window.onclick = function(e) {
+            if (e.target == document.getElementById("portfolio-modal")) closePortfolio();
+            if (e.target == pModal) pModal.style.display = "none";
         }
     </script>
 </body>

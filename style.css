@@ -1,73 +1,53 @@
-/* ... Keep your Global Styles ... */
+/* --- GLOBAL --- */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+html { scroll-behavior: smooth; }
+body { background: #0b0e14; background-image: url('assets/bg.jpg'); background-size: cover; background-attachment: fixed; color: white; overflow-x: hidden; }
 
-.container {
-    min-height: 100vh;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 60px;
-    padding: 50px 20px;
-    z-index: 10;
-    position: relative;
-} /* Removed the extra closing brace that was here */
+/* --- SPACE EFFECT --- */
+.space-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.stars-twinkle { position: absolute; width: 100%; height: 100%; background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat; opacity: 0.2; animation: twinkle 150s linear infinite; }
+@keyframes twinkle { from { background-position: 0 0; } to { background-position: -10000px 5000px; } }
 
-/* --- METEORS (Improved Visibility) --- */
-.meteor-1, .meteor-2 {
-    z-index: 1;
-}
+/* --- CONTAINERS --- */
+.container { min-height: 100vh; width: 100%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; align-items: center; gap: 50px; padding: 80px 20px; position: relative; }
 
-@keyframes shootingStar {
-    0% { transform: rotate(315deg) translateX(0); opacity: 0; }
-    5% { opacity: 1; }
-    20% { transform: rotate(315deg) translateX(-1000px); opacity: 0; }
-    100% { opacity: 0; }
-}
+/* --- PAGE 1 --- */
+.profile-side { flex: 1; text-align: center; }
+.pfp-container img { width: 180px; height: 180px; border-radius: 50%; border: 2px solid #00d4ff; box-shadow: 0 0 20px rgba(0, 212, 255, 0.5); cursor: pointer; transition: 0.3s; }
+.pfp-container img:hover { transform: scale(1.05); }
+.titles { color: #00d4ff; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 10px; margin: 15px 0; font-size: 0.95rem; }
+.about-card { flex: 1.2; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(15px); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
+.speech-bubble { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); padding: 12px; border-radius: 15px; font-size: 13px; margin-bottom: 20px; transition: 1s; }
 
-/* --- MODAL FIXES --- */
-.modal {
-    display: none; 
-    position: fixed;
-    z-index: 99999; /* Ensure it's above everything */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(15px);
-    justify-content: center;
-    align-items: center; 
-}
+/* --- PAGE 2 SKILLS GRID --- */
+.glass-panel { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(20px); border: 2px solid #00d4ff; border-radius: 30px; padding: 40px; width: 100%; box-shadow: 0 0 40px rgba(0, 212, 255, 0.2); text-align: center; }
+.main-title { color: #00d4ff; font-size: 2.2rem; text-shadow: 0 0 10px #00d4ff; margin-bottom: 30px; text-transform: uppercase; }
+.skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.skill-box { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 15px; padding: 20px; display: flex; align-items: center; gap: 15px; text-align: left; transition: 0.3s; }
+.skill-box:hover { border-color: #00d4ff; box-shadow: 0 0 15px rgba(0, 212, 255, 0.3); transform: translateY(-3px); }
+.icon-area i { font-size: 2rem; color: #00d4ff; filter: drop-shadow(0 0 5px #00d4ff); }
 
-#album-img {
-    max-width: 70%; /* Reduced slightly to give nav buttons room */
-    max-height: 65vh;
-    object-fit: contain;
-    border: 2px solid #00d4ff;
-    border-radius: 12px;
-}
+/* --- MODALS --- */
+.modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); justify-content: center; align-items: center; }
+.modal-content { max-width: 80%; border-radius: 15px; border: 2px solid #00d4ff; }
+.album-wrapper { width: 90%; max-width: 800px; text-align: center; }
+.album-main { display: flex; align-items: center; gap: 20px; justify-content: center; }
+#album-img { max-width: 80%; border: 2px solid #00d4ff; border-radius: 10px; box-shadow: 0 0 30px rgba(0, 212, 255, 0.4); }
+.nav-btn { background: rgba(0, 212, 255, 0.1); border: 1px solid #00d4ff; color: #00d4ff; padding: 15px; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+.nav-btn:hover { background: #00d4ff; color: black; }
+.close-modal, .close-album { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
 
-/* --- MOBILE SPECIFIC FIXES --- */
+/* --- BUTTONS --- */
+.button-group { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+.card-btn, .email-btn { display: inline-block; padding: 12px 24px; border: 1px solid #00d4ff; border-radius: 8px; color: white; text-decoration: none; background: rgba(0, 212, 255, 0.1); transition: 0.3s; cursor: pointer; }
+.card-btn:hover, .email-btn:hover { background: #00d4ff; color: black; box-shadow: 0 0 20px #00d4ff; }
+
+/* --- MOBILE --- */
 @media (max-width: 850px) {
-    .container {
-        flex-direction: column;
-        padding: 40px 20px;
-        gap: 20px;
-    }
-    
-    .about-card {
-        padding: 20px;
-        margin-top: 20px;
-    }
-
-    .album-main {
-        gap: 10px;
-    }
-
-    .nav-btn {
-        padding: 10px;
-        font-size: 1.2rem;
-    }
+    .container { flex-direction: column; text-align: center; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .skill-box { flex-direction: column; text-align: center; }
+    .album-main { position: relative; }
+    #prevBtn { position: absolute; left: -10px; }
+    #nextBtn { position: absolute; right: -10px; }
 }

@@ -17,20 +17,16 @@
     </div>
     
     <div class="container" id="home-section">
-        
         <section class="profile-side">
             <div id="welcome-bubble" class="speech-bubble">
                 Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant in the bottom corner if you have any questions!           
             </div>
-            
             <div class="pfp-container">
                 <img src="assets/pfp.jpg" alt="Mark John Gonzalvo"> 
             </div>
             <h1>Mark John Gonzalvo</h1>
             <p class="titles">Customer Service<br>Content Moderator<br>Administrative Support<br>Freelancer</p>
-          
-            <a href="https://mail.google.com/mail/u/1/#inbox?compose=GsNJsMDPRmbCCXxSvflMxTzBvbNLrGGXFqlqWjgSjWxKqqGZwTpRBlzjRMmHWJbmRNqSpnPFZztvsfpCXHGgzQGljKMTPCMqVmgvQQpRnwzVmwnGvTxBlfSMnTmBWjnRJqCsGCQNfnPQkhPTZthq" class="email-btn">Email me</a>
-
+            <a href="mailto:your-email@gmail.com" class="email-btn">Email me</a>
             <div class="social-icons">
                 <a href="https://www.facebook.com/mjcore"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://ph.linkedin.com/in/mark-john-gonzalvo-6384b4149"><i class="fab fa-linkedin-in"></i></a>
@@ -49,178 +45,69 @@
                 </p>
                 <div class="button-group">
                     <a href="assets/MJ_Gonzalvo_Resume.pdf" target="_blank" class="card-btn">Resume</a>
-                    <a href="#gallery-section" class="card-btn">Portfolio</a>
+                    <a href="#page-2-space" class="card-btn">Skills</a>
                 </div>
             </div>
         </section>
-
-        <div class="scroll-indicator">
-            <a href="#page-2-space"><i class="fas fa-chevron-down"></i></a>
-        </div>
-        
     </div> 
 
     <div class="container" id="page-2-space">
-        <section class="skills-glass-card">
-            <h2 class="skills-title">WHAT I BRING TO YOUR TEAM</h2>
-            <p class="skills-subtitle">I focus on efficiency, quality, and reliability—helping businesses stay organized and deliver excellent service.</p>
+        <div class="glass-panel">
+            <h2 class="main-title">WHAT I BRING TO YOUR TEAM</h2>
+            <p class="main-subtitle">I focus on efficiency, quality, and reliability—helping businesses stay organized and deliver excellent service.</p>
             
             <div class="skills-grid">
-                <div class="skill-item">
-                    <i class="fas fa-headset skill-icon"></i>
-                    <div class="skill-info">
+                <div class="skill-box">
+                    <div class="icon-area"><i class="fas fa-headset"></i></div>
+                    <div class="text-area">
                         <h3>Customer-Focused Support</h3>
                         <p>Handled chat, calls, and email support professionally.</p>
                     </div>
                 </div>
-                <div class="skill-item">
-                    <i class="fas fa-user-shield skill-icon"></i>
-                    <div class="skill-info">
+                <div class="skill-box">
+                    <div class="icon-area"><i class="fas fa-user-shield"></i></div>
+                    <div class="text-area">
                         <h3>Content Moderation Expert</h3>
                         <p>Experienced in reviewing and maintaining platform quality.</p>
                     </div>
                 </div>
-                <div class="skill-item">
-                    <i class="fas fa-tasks skill-icon"></i>
-                    <div class="skill-info">
+                <div class="skill-box">
+                    <div class="icon-area"><i class="fas fa-tasks"></i></div>
+                    <div class="text-area">
                         <h3>Administrative Efficiency</h3>
                         <p>Organized, detail-oriented, and task-driven.</p>
                     </div>
                 </div>
-                <div class="skill-item">
-                    <i class="fas fa-laptop-code skill-icon"></i>
-                    <div class="skill-info">
+                <div class="skill-box">
+                    <div class="icon-area"><i class="fas fa-laptop-code"></i></div>
+                    <div class="text-area">
                         <h3>Tech-Savvy Problem Solver</h3>
                         <p>Comfortable with tools, systems, and AI projects.</p>
                     </div>
                 </div>
-                <div class="skill-item">
-                    <i class="fas fa-briefcase skill-icon"></i>
-                    <div class="skill-info">
+                <div class="skill-box">
+                    <div class="icon-area"><i class="fas fa-briefcase"></i></div>
+                    <div class="text-area">
                         <h3>Reliable & Adaptable</h3>
                         <p>Flexible, deadline-driven, and easy to work with.</p>
                     </div>
                 </div>
-                <div class="skill-item">
-                    <i class="fas fa-clock skill-icon"></i>
-                    <div class="skill-info">
+                <div class="skill-box">
+                    <div class="icon-area"><i class="fas fa-clock"></i></div>
+                    <div class="text-area">
                         <h3>Organized Under Pressure</h3>
                         <p>Calm and efficient even during high-volume tasks.</p>
                     </div>
                 </div>
             </div>
 
-            <a href="#home-section" class="card-btn back-to-top">↑ Back to Top</a>
-        </section>
-    </div>
-
-    <div id="pfp-modal" class="modal">
-        <span class="close-modal">&times;</span>
-        <img class="modal-content" id="img-expanded">
-    </div>
-
-    <div id="portfolio-album-modal" class="modal">
-        <span class="close-album" id="close-portfolio">&times;</span>
-        <div class="album-wrapper">
-            <div class="album-main">
-                <button id="prevBtn" class="nav-btn"><i class="fas fa-chevron-left"></i></button>
-                <img id="album-img" src="" alt="Achievement">
-                <button id="nextBtn" class="nav-btn"><i class="fas fa-chevron-right"></i></button>
-            </div>
-            <div class="album-footer">
-                <p id="album-text"></p>
-            </div>
+            <a href="#home-section" class="card-btn back-btn">↑ Back to Top</a>
         </div>
     </div>
 
     <script>
-      window.chatbaseConfig = {
-        chatbotId: "aWn99QuaimyS0A8WuIJVn",
-        showFloatingInitialMessages: true, 
-        floatingInitialMessagesDelay: 3, 
-      };
+      window.chatbaseConfig = { chatbotId: "aWn99QuaimyS0A8WuIJVn" };
     </script>
     <script src="https://www.chatbase.co/embed.min.js" id="aWn99QuaimyS0A8WuIJVn" defer></script>
-
-    <script>
-        // 1. Welcome Bubble Logic
-        window.addEventListener('load', function() {
-            const bubble = document.getElementById('welcome-bubble');
-            if (bubble) {
-                setTimeout(() => {
-                    bubble.style.opacity = '0';
-                    setTimeout(() => { bubble.style.display = 'none'; }, 1000); 
-                }, 15000); 
-            }
-        });
-
-        // 2. PFP Modal Logic
-        document.addEventListener("DOMContentLoaded", function() {
-            const pfpModal = document.getElementById("pfp-modal");
-            const pfpImg = document.querySelector(".pfp-container img");
-            const modalImg = document.getElementById("img-expanded");
-            const closePfp = document.querySelector(".close-modal");
-
-            if (pfpImg) {
-                pfpImg.onclick = function() {
-                    pfpModal.style.display = "flex";
-                    modalImg.src = this.src;
-                }
-            }
-            if (closePfp) closePfp.onclick = () => pfpModal.style.display = "none";
-            
-            window.addEventListener("click", (e) => {
-                if (e.target == pfpModal) pfpModal.style.display = "none";
-            });
-        });
-
-        // 3. Portfolio Album Logic
-        document.addEventListener("DOMContentLoaded", function() {
-            const myAchievements = [
-                { src: 'assets/cert1.jpg', desc: 'Awarded Top Agent for May 2025...' },
-                { src: 'assets/cert2.jpg', desc: 'Awarded Top Agent for June 2025...' },
-                { src: 'assets/cert3.jpg', desc: 'Awarded Top Agent for Q3 2017...' }
-            ];
-
-            let currentIdx = 0;
-            const albumModal = document.getElementById("portfolio-album-modal");
-            const albumImg = document.getElementById("album-img");
-            const albumText = document.getElementById("album-text");
-            const portfolioBtn = document.querySelector('a[href="#gallery-section"]');
-
-            function updateView() {
-                if(myAchievements.length > 0) {
-                    albumImg.src = myAchievements[currentIdx].src;
-                    albumText.innerText = myAchievements[currentIdx].desc;
-                }
-            }
-
-            if (portfolioBtn) {
-                portfolioBtn.onclick = function(e) {
-                    e.preventDefault();
-                    albumModal.style.display = "flex";
-                    updateView();
-                }
-            }
-
-            document.getElementById("nextBtn").onclick = (e) => {
-                e.stopPropagation();
-                currentIdx = (currentIdx + 1) % myAchievements.length;
-                updateView();
-            };
-
-            document.getElementById("prevBtn").onclick = (e) => {
-                e.stopPropagation();
-                currentIdx = (currentIdx - 1 + myAchievements.length) % myAchievements.length;
-                updateView();
-            };
-
-            document.getElementById("close-portfolio").onclick = () => albumModal.style.display = "none";
-            
-            window.addEventListener("click", (e) => {
-                if (e.target == albumModal) albumModal.style.display = "none";
-            });
-        });
-    </script>
 </body>
 </html>

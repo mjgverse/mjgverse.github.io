@@ -3,10 +3,82 @@
 html { scroll-behavior: smooth; }
 body { background: #0b0e14; background-image: url('assets/bg.jpg'); background-size: cover; background-attachment: fixed; color: white; overflow-x: hidden; }
 
-/* --- SPACE EFFECT --- */
-.space-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-.stars-twinkle { position: absolute; width: 100%; height: 100%; background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat; opacity: 0.2; animation: twinkle 150s linear infinite; }
-@keyframes twinkle { from { background-position: 0 0; } to { background-position: -10000px 5000px; } }
+/* --- SPACE ANIMATION OVERLAY --- */
+.space-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Keep it behind everything */
+    pointer-events: none; 
+    overflow: hidden;
+}
+
+/* 1. Twinkling Star Dust */
+.stars-twinkle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%; /* Wider to allow for movement */
+    height: 200%;
+    background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+    opacity: 0.3;
+    animation: twinkleMove 100s linear infinite;
+}
+
+/* 2. Pulsing Glow Stars */
+.glow-stars {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    /* Randomly placed glowing points */
+    box-shadow: 
+        15vw 10vh 2px 1px #fff, 35vw 45vh 2px 1px #fff, 
+        65vw 15vh 2px 1px #fff, 85vw 50vh 2px 1px #fff, 
+        25vw 80vh 2px 1px #fff, 75vw 85vh 2px 1px #fff;
+    animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* 3. Meteors (Shooting Stars) */
+[class^="meteor-"] {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    opacity: 0;
+}
+
+[class^="meteor-"]::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, white, transparent);
+}
+
+.meteor-1 { top: 10%; right: 10%; animation: shootingStar 8s linear infinite; }
+.meteor-2 { top: 30%; right: -10%; animation: shootingStar 12s linear infinite; animation-delay: 4s; }
+
+/* --- KEYFRAMES (The actual motion) --- */
+@keyframes twinkleMove {
+    from { transform: translate(0, 0); }
+    to { transform: translate(-50%, -50%); }
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+}
+
+@keyframes shootingStar {
+    0% { transform: rotate(315deg) translateX(0); opacity: 0; }
+    5% { opacity: 1; }
+    15% { transform: rotate(315deg) translateX(-1000px); opacity: 0; }
+    100% { opacity: 0; }
+}}
 
 /* --- CONTAINERS --- */
 .container { min-height: 100vh; width: 100%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; align-items: center; gap: 50px; padding: 80px 20px; position: relative; }

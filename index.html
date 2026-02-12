@@ -53,66 +53,8 @@
                 </div>
             </div>
         </section>
-
-        <div class="scroll-indicator">
-            <a href="#page-2-space"><i class="fas fa-chevron-down"></i></a>
-        </div>
         
     </div> 
-
-    <div class="container" id="page-2-space">
-        <section class="skills-glass-card">
-            <h2 class="skills-title">WHAT I BRING TO YOUR TEAM</h2>
-            <p class="skills-subtitle">I focus on efficiency, quality, and reliability—helping businesses stay organized and deliver excellent service.</p>
-            
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <i class="fas fa-headset skill-icon"></i>
-                    <div class="skill-info">
-                        <h3>Customer-Focused Support</h3>
-                        <p>Handled chat, calls, and email support professionally.</p>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <i class="fas fa-user-shield skill-icon"></i>
-                    <div class="skill-info">
-                        <h3>Content Moderation Expert</h3>
-                        <p>Experienced in reviewing and maintaining platform quality.</p>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <i class="fas fa-tasks skill-icon"></i>
-                    <div class="skill-info">
-                        <h3>Administrative Efficiency</h3>
-                        <p>Organized, detail-oriented, and task-driven.</p>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <i class="fas fa-laptop-code skill-icon"></i>
-                    <div class="skill-info">
-                        <h3>Tech-Savvy Problem Solver</h3>
-                        <p>Comfortable with tools, systems, and AI projects.</p>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <i class="fas fa-briefcase skill-icon"></i>
-                    <div class="skill-info">
-                        <h3>Reliable & Adaptable</h3>
-                        <p>Flexible, deadline-driven, and easy to work with.</p>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <i class="fas fa-clock skill-icon"></i>
-                    <div class="skill-info">
-                        <h3>Organized Under Pressure</h3>
-                        <p>Calm and efficient even during high-volume tasks.</p>
-                    </div>
-                </div>
-            </div>
-
-            <a href="#home-section" class="card-btn back-to-top">↑ Back to Top</a>
-        </section>
-    </div>
 
     <div id="pfp-modal" class="modal">
         <span class="close-modal">&times;</span>
@@ -154,7 +96,7 @@
             }
         });
 
-        // 2. PFP Modal Logic
+        // 2. PFP Modal Logic (Existing)
         document.addEventListener("DOMContentLoaded", function() {
             const pfpModal = document.getElementById("pfp-modal");
             const pfpImg = document.querySelector(".pfp-container img");
@@ -169,17 +111,19 @@
             }
             if (closePfp) closePfp.onclick = () => pfpModal.style.display = "none";
             
+            // Global click closer for PFP
             window.addEventListener("click", (e) => {
                 if (e.target == pfpModal) pfpModal.style.display = "none";
             });
         });
 
-        // 3. Portfolio Album Logic
+        // 3. Portfolio Album Logic (New)
         document.addEventListener("DOMContentLoaded", function() {
+            // EDIT YOUR ACHIEVEMENTS HERE:
             const myAchievements = [
-                { src: 'assets/cert1.jpg', desc: 'Awarded Top Agent for May 2025...' },
-                { src: 'assets/cert2.jpg', desc: 'Awarded Top Agent for June 2025...' },
-                { src: 'assets/cert3.jpg', desc: 'Awarded Top Agent for Q3 2017...' }
+                { src: 'assets/cert1.jpg', desc: 'Awarded Top Agent for May 2025 in a Content Moderation account at Alorica for consistent quality and performance' },
+                { src: 'assets/cert2.jpg', desc: 'Awarded Top Agent for June 2025 in a Content Moderation account at Alorica for consistent quality and performance' },
+                { src: 'assets/cert3.jpg', desc: 'Awarded Top Agent for Q3 2017 in a Healthcare account as a Customer Service Representative at Concentrix for consistent quality and performance.' }
             ];
 
             let currentIdx = 0;
@@ -217,6 +161,7 @@
 
             document.getElementById("close-portfolio").onclick = () => albumModal.style.display = "none";
             
+            // Close on outer click
             window.addEventListener("click", (e) => {
                 if (e.target == albumModal) albumModal.style.display = "none";
             });

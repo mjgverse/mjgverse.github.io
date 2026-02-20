@@ -117,17 +117,44 @@
         </div>
     </div>
 
-    <script>
-      window.chatbaseConfig = { chatbotId: "aWn99QuaimyS0A8WuIJVn", showFloatingInitialMessages: true, floatingInitialMessagesDelay: 3 };
-    </script>
-    <script src="https://www.chatbase.co/embed.min.js" id="aWn99QuaimyS0A8WuIJVn" defer></script>
+  <script>
+(function () {
 
-    <script>
-        // Welcome Bubble
-        window.addEventListener('load', () => {
-            const bubble = document.getElementById('welcome-bubble');
-            if (bubble) setTimeout(() => { bubble.style.opacity = '0'; }, 15000);
-        });
+  if (!window.chatbase || window.chatbase("getState") !== "initialized") {
+    
+    window.chatbase = (...arguments) => {
+      if (!window.chatbase.q) {
+        window.chatbase.q = [];
+      }
+      window.chatbase.q.push(arguments);
+    };
+
+    window.chatbase = new Proxy(window.chatbase, {
+      get(target, prop) {
+        if (prop === "q") {
+          return target.q;
+        }
+        return (...args) => target(prop, ...args);
+      }
+    });
+  }
+
+  const onLoad = function () {
+    const script = document.createElement("script");
+    script.src = "https://www.chatbase.co/embed.min.js";
+    script.id = "Z5G68A4xbhCF3rKWtZQtD";
+    script.domain = "www.chatbase.co";
+    document.body.appendChild(script);
+  };
+
+  if (document.readyState === "complete") {
+    onLoad();
+  } else {
+    window.addEventListener("load", onLoad);
+  }
+
+})();
+</script>
 
         // PFP Modal
         const pfpModal = document.getElementById("pfp-modal");

@@ -503,13 +503,105 @@ nav.scrolled { background: rgba(6,8,16,0.92); }
 
 /* ========= FOOTER ========= */
 footer {
-    padding: 40px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 0.82rem;
     position: relative;
     z-index: 10;
-    border-top: 1px solid rgba(255,255,255,0.05);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    background: rgba(0,0,0,0.4);
+    padding: 60px 80px 0;
+}
+
+.footer-main {
+    display: flex;
+    gap: 80px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.footer-brand {
+    flex: 0 0 260px;
+}
+
+.footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 14px;
+}
+.footer-logo span { color: var(--cyan); }
+
+.footer-tagline {
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 10px;
+}
+.footer-social a {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+.footer-social a:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    background: var(--cyan-dim);
+}
+
+.footer-links {
+    display: flex;
+    gap: 60px;
+    flex: 1;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-col h4 {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.footer-col a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: color 0.2s;
+}
+.footer-col a:hover { color: white; }
+
+.footer-bottom {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+@media (max-width: 760px) {
+    footer { padding: 40px 24px 0; }
+    .footer-main { flex-direction: column; gap: 40px; }
+    .footer-brand { flex: 1; }
+    .footer-links { flex-wrap: wrap; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
 }
 
 /* ========= MODALS ========= */
@@ -1098,7 +1190,46 @@ footer {
 
 <!-- FOOTER -->
 <footer>
-    <p>© 2025 Mark John Gonzalvo — Built with care.</p>
+    <div class="footer-main">
+        <div class="footer-brand">
+            <div class="footer-logo">MJ<span>.</span></div>
+            <p class="footer-tagline">Customer experience professional<br>transitioning into digital marketing.</p>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/mjcore" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://ph.linkedin.com/in/mark-john-gonzalvo-6384b4149" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-x-twitter"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-links">
+            <div class="footer-col">
+                <h4>Navigate</h4>
+                <a href="#hero">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#videos">Videos</a>
+                <a href="#" id="footer-portfolio-btn">Portfolio</a>
+            </div>
+            <div class="footer-col">
+                <h4>Experience</h4>
+                <a href="#">Customer Service</a>
+                <a href="#">Content Moderation</a>
+                <a href="#">Digital Marketing</a>
+                <a href="#">AI Tools</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <a href="mailto:your-email@example.com">Email Me</a>
+                <a href="https://ph.linkedin.com/in/mark-john-gonzalvo-6384b4149" target="_blank">LinkedIn</a>
+                <a href="assets/MJ_Gonzalvo_Resume.pdf" target="_blank">Resume</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 Mark John Gonzalvo. All rights reserved.</p>
+        <p>Makati City, Philippines 🇵🇭</p>
+    </div>
 </footer>
 
 <!-- PFP MODAL -->
@@ -1390,6 +1521,7 @@ function openPortfolio(e) {
 
 document.getElementById('portfolio-btn').addEventListener('click', openPortfolio);
 document.getElementById('portfolio-nav-btn').addEventListener('click', openPortfolio);
+document.getElementById('footer-portfolio-btn').addEventListener('click', openPortfolio);
 document.getElementById('nextBtn').addEventListener('click', () => { currentIdx = (currentIdx + 1) % myAchievements.length; updateAlbum(); });
 document.getElementById('prevBtn').addEventListener('click', () => { currentIdx = (currentIdx - 1 + myAchievements.length) % myAchievements.length; updateAlbum(); });
 document.getElementById('close-portfolio').addEventListener('click', () => { albumModal.style.display = 'none'; });

@@ -926,6 +926,7 @@ footer {
     display: flex; align-items: center; justify-content: center;
     font-size: 1.2rem;
     color: var(--muted);
+    pointer-events: none;
 }
 .vid-thumb:hover {
     border-color: var(--cyan);
@@ -1014,7 +1015,7 @@ footer {
 
         <h1 class="hero-name">Mark John Gonzalvo</h1>
 
-        <p class="hero-tagline">Customer experience professional transitioning into digital marketing — bridging BPO expertise with modern AI-powered workflows.</p>
+        <p class="hero-tagline">Supporting operations and resolving customer issues with data-driven accuracy, experienced in customer support, content review, admin tasks, and digital tools.</p>
 
         <div class="hero-actions">
             <a href="assets/MJ_Gonzalvo_Resume.pdf" target="_blank" class="btn-primary">View Resume</a>
@@ -1044,11 +1045,9 @@ footer {
 
     <div class="about-grid">
         <div class="about-text reveal reveal-delay-2">
-            <p>I've spent years in customer service and tech support, helping people through chat, calls, and email. I also have experience in content moderation, data tasks, and AI-related projects.</p>
+            <p>I've spent years in customer service and tech support, assisting clients through chat, calls, and email by addressing inquiries, resolving technical issues, and delivering clear, helpful guidance. Along the way, I gained experience in content moderation, managing data workflows, and contributing to AI training projects.</p>
             <br>
-            <p>I'm now transitioning into digital marketing, applying skills I developed in the BPO industry — problem-solving, critical thinking, time management, and the ability to work efficiently in fast-paced environments.</p>
-            <br>
-            <p>I use AI tools to support tasks like organizing and structuring data more efficiently. I focus on accuracy, consistency, and delivering reliable results in every task I handle.</p>
+            <p>In my AI-related work, I reviewed and labeled data, tested models, and ensured quality outputs for machine learning systems, sharpening my analytical skills and attention to detail.</p>
             <br>
             <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;">
                 <a href="assets/MJ_Gonzalvo_Resume.pdf" target="_blank" class="btn-primary" style="font-size:0.88rem;padding:11px 24px;">Resume</a>
@@ -1193,7 +1192,7 @@ footer {
     <div class="footer-main">
         <div class="footer-brand">
             <div class="footer-logo">MJ<span>.</span></div>
-            <p class="footer-tagline">Customer experience professional<br>transitioning into digital marketing.</p>
+            <p class="footer-tagline">Experienced in customer support, content review,<br>admin tasks, and digital tools.</p>
             <div class="footer-social">
                 <a href="https://www.facebook.com/mjcore" target="_blank"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://ph.linkedin.com/in/mark-john-gonzalvo-6384b4149" target="_blank"><i class="fab fa-linkedin-in"></i></a>
@@ -1357,30 +1356,10 @@ skillCards.forEach(c => cardObserver.observe(c));
 
 // ========= VIDEO CAROUSEL =========
 const videos = [
-    {
-        src: 'assets/video1.mp4',
-        tag: 'Customer Service',
-        title: 'The Voice Behind the Solution',
-        desc: 'Handling customer concerns across calls, emails, and live chat — turning every interaction into a seamless, satisfying experience through clear communication and fast problem-solving.'
-    },
-    {
-        src: 'assets/video2.mp4',
-        tag: 'Content Moderation',
-        title: 'Keeping Platforms Safe',
-        desc: 'Monitoring and evaluating user-generated content to maintain a safe, positive environment — applying sharp judgment and consistent standards to protect every user on the platform.'
-    },
-    {
-        src: 'assets/video3.mp4',
-        tag: 'Digital Marketing',
-        title: 'Growing My Digital Presence',
-        desc: 'Upskilling into the world of social media and digital marketing — learning to craft engaging content, build brand awareness, and connect meaningfully with audiences online.'
-    },
-    {
-        src: 'assets/video4.mp4',
-        tag: 'AI Specialist',
-        title: 'Training the Future',
-        desc: 'Working hands-on with AI tools — from training and fine-tuning models to generating AI-powered content, leveraging cutting-edge platforms to boost productivity and innovation.'
-    }
+    { src: 'assets/video1.mp4', tag: 'Customer Service', title: 'The Voice Behind the Solution', desc: 'Handling customer concerns across calls, emails, and live chat — turning every interaction into a seamless, satisfying experience through clear communication and fast problem-solving.' },
+    { src: 'assets/video2.mp4', tag: 'Content Moderation', title: 'Keeping Platforms Safe', desc: 'Monitoring and evaluating user-generated content to maintain a safe, positive environment — applying sharp judgment and consistent standards to protect every user on the platform.' },
+    { src: 'assets/video3.mp4', tag: 'Digital Marketing', title: 'Growing My Digital Presence', desc: 'Upskilling into the world of social media and digital marketing — learning to craft engaging content, build brand awareness, and connect meaningfully with audiences online.' },
+    { src: 'assets/video4.mp4', tag: 'AI Specialist', title: 'Training the Future', desc: 'Working hands-on with AI tools — from training and fine-tuning models to generating AI-powered content, leveraging cutting-edge platforms to boost productivity and innovation.' }
 ];
 
 let currentVid = 0;
@@ -1396,38 +1375,29 @@ const vidTitle = document.getElementById('vid-title');
 const vidDesc = document.getElementById('vid-desc');
 const thumbs = document.querySelectorAll('.vid-thumb');
 
-function padNum(n) { return String(n+1).padStart(2,'0'); }
-
-function switchVideo(idx, direction) {
-    if (idx === currentVid) return;
-    currentVid = idx;
-
-    // pause current
+function switchVideo(idx) {
+    currentVid = ((idx % videos.length) + videos.length) % videos.length;
     phoneVideo.pause();
     isPlaying = false;
     playIcon.className = 'fas fa-play';
     playOverlay.classList.remove('hidden');
 
-    // fade out
     const info = document.querySelector('.phone-info');
     const screen = document.querySelector('.phone-screen');
+    info.style.transition = 'none';
+    screen.style.transition = 'none';
     info.style.opacity = '0';
     info.style.transform = 'translateX(20px)';
     screen.style.opacity = '0';
 
     setTimeout(() => {
-        // update content
         const v = videos[currentVid];
         phoneVideo.src = v.src;
-        vidCounter.textContent = `${padNum(currentVid)} / 04`;
+        vidCounter.textContent = (currentVid + 1).toString().padStart(2,'0') + ' / 04';
         vidTag.textContent = v.tag;
         vidTitle.textContent = v.title;
         vidDesc.textContent = v.desc;
-
-        // update thumbnails
         thumbs.forEach((t, i) => t.classList.toggle('active', i === currentVid));
-
-        // fade in
         info.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
         screen.style.transition = 'opacity 0.4s ease';
         info.style.opacity = '1';
@@ -1437,7 +1407,7 @@ function switchVideo(idx, direction) {
 }
 
 // play/pause
-playToggle.onclick = () => {
+playToggle.addEventListener('click', () => {
     if (isPlaying) {
         phoneVideo.pause();
         isPlaying = false;
@@ -1449,28 +1419,24 @@ playToggle.onclick = () => {
         playIcon.className = 'fas fa-pause';
         playOverlay.classList.add('hidden');
     }
-};
-
-// show controls on hover
-document.querySelector('.phone-shell').addEventListener('mouseenter', () => {
-    if (isPlaying) playOverlay.classList.remove('hidden');
-});
-document.querySelector('.phone-shell').addEventListener('mouseleave', () => {
-    if (isPlaying) playOverlay.classList.add('hidden');
 });
 
-// prev / next
-document.getElementById('vid-prev').onclick = () => switchVideo((currentVid - 1 + videos.length) % videos.length);
-document.getElementById('vid-next').onclick = () => switchVideo((currentVid + 1) % videos.length);
+// hover show/hide controls
+document.querySelector('.phone-shell').addEventListener('mouseenter', () => { if (isPlaying) playOverlay.classList.remove('hidden'); });
+document.querySelector('.phone-shell').addEventListener('mouseleave', () => { if (isPlaying) playOverlay.classList.add('hidden'); });
+
+// prev / next buttons
+document.getElementById('vid-prev').addEventListener('click', () => switchVideo(currentVid - 1));
+document.getElementById('vid-next').addEventListener('click', () => switchVideo(currentVid + 1));
 
 // thumbnails
 thumbs.forEach(t => {
-    t.onclick = () => switchVideo(parseInt(t.dataset.index));
+    t.addEventListener('click', () => switchVideo(parseInt(t.dataset.index)));
 });
 
-// auto-advance when video ends
+// auto-advance on video end
 phoneVideo.addEventListener('ended', () => {
-    switchVideo((currentVid + 1) % videos.length);
+    switchVideo(currentVid + 1);
     setTimeout(() => {
         phoneVideo.play();
         isPlaying = true;
@@ -1478,14 +1444,13 @@ phoneVideo.addEventListener('ended', () => {
         playOverlay.classList.add('hidden');
     }, 350);
 });
+
+// swipe on phone
 let touchStartX = 0;
 document.querySelector('.phone-shell').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
 document.querySelector('.phone-shell').addEventListener('touchend', e => {
     const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) {
-        if (diff > 0) switchVideo((currentVid + 1) % videos.length);
-        else switchVideo((currentVid - 1 + videos.length) % videos.length);
-    }
+    if (Math.abs(diff) > 40) switchVideo(diff > 0 ? currentVid + 1 : currentVid - 1);
 });
 
 // ========= FOOTER EXPERIENCE LINKS =========
@@ -1534,4 +1499,9 @@ document.getElementById('portfolio-nav-btn').addEventListener('click', openPortf
 document.getElementById('footer-portfolio-btn').addEventListener('click', openPortfolio);
 document.getElementById('nextBtn').addEventListener('click', () => { currentIdx = (currentIdx + 1) % myAchievements.length; updateAlbum(); });
 document.getElementById('prevBtn').addEventListener('click', () => { currentIdx = (currentIdx - 1 + myAchievements.length) % myAchievements.length; updateAlbum(); });
-document.getElementById('close-portfolio').addEventListener('click', () => { albumModal.style.display =
+document.getElementById('close-portfolio').addEventListener('click', () => { albumModal.style.display = 'none'; });
+albumModal.addEventListener('click', (e) => { if (e.target === albumModal) albumModal.style.display = 'none'; });
+
+</script>
+</body>
+</html>

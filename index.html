@@ -218,21 +218,22 @@ nav.scrolled { background: rgba(6,8,16,0.92); }
 .hero-pfp-wrap {
     position: relative;
     display: inline-block;
-    margin-bottom: 36px;
+    margin-bottom: 20px;
     opacity: 0;
     animation: fadeDown 0.8s 0.1s forwards;
 }
 .hero-pfp {
-    width: 150px; height: 150px;
+    width: 180px; height: 180px;
     border-radius: 50%;
-    border: 2px solid var(--cyan-border);
+    border: 3px solid var(--cyan-border);
     object-fit: cover;
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
+    display: block;
 }
 .hero-pfp:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 40px rgba(0,212,255,0.5);
+    box-shadow: 0 0 50px rgba(0,212,255,0.6);
 }
 .pfp-ring {
     position: absolute; inset: -8px;
@@ -532,11 +533,11 @@ footer {
 .modal-close:hover { opacity: 1; }
 
 #img-expanded {
-    max-width: 420px;
-    width: 90%;
+    max-width: 340px;
+    width: 80%;
     border-radius: 20px;
-    border: 1px solid var(--cyan-border);
-    box-shadow: 0 0 60px rgba(0,212,255,0.15);
+    border: 2px solid var(--cyan-border);
+    box-shadow: 0 0 60px rgba(0,212,255,0.2);
 }
 
 /* portfolio modal */
@@ -884,7 +885,7 @@ footer {
             Available for New Opportunities
         </div>
 
-        <h1 class="hero-name">Mark John<br>Gonzalvo</h1>
+        <h1 class="hero-name">Mark John Gonzalvo</h1>
 
         <p class="hero-tagline">Customer experience professional transitioning into digital marketing — bridging BPO expertise with modern AI-powered workflows.</p>
 

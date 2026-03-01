@@ -234,6 +234,8 @@ nav.scrolled { background: rgba(6,8,16,0.92); }
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
     display: block;
+    position: relative;
+    z-index: 2;
 }
 .hero-pfp:hover {
     transform: scale(1.05);
@@ -244,6 +246,7 @@ nav.scrolled { background: rgba(6,8,16,0.92); }
     border-radius: 50%;
     border: 1px solid rgba(0,212,255,0.2);
     animation: spin 12s linear infinite;
+    pointer-events: none;
 }
 .pfp-ring::before {
     content: '';
@@ -515,32 +518,54 @@ footer {
     position: fixed;
     z-index: 1000;
     inset: 0;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(16px);
+    background: rgba(0,0,0,0.88);
+    backdrop-filter: blur(18px);
     justify-content: center;
     align-items: center;
 }
 
+/* Glowing edge on modal content wrappers */
+.modal-inner {
+    position: relative;
+    border-radius: 24px;
+    padding: 4px;
+    background: linear-gradient(135deg, rgba(0,212,255,0.5), rgba(0,212,255,0.05), rgba(0,212,255,0.4));
+    box-shadow:
+        0 0 30px rgba(0,212,255,0.4),
+        0 0 80px rgba(0,212,255,0.15),
+        inset 0 0 30px rgba(0,212,255,0.05);
+}
+.modal-inner-content {
+    background: #080d1a;
+    border-radius: 21px;
+    padding: 30px;
+    position: relative;
+}
+
 .modal-close {
-    position: absolute;
+    position: fixed;
     top: 24px; right: 30px;
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: white;
     cursor: pointer;
-    opacity: 0.6;
-    transition: opacity 0.2s;
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s;
     background: none;
     border: none;
     line-height: 1;
+    z-index: 1001;
 }
-.modal-close:hover { opacity: 1; }
+.modal-close:hover { opacity: 1; color: var(--cyan); }
 
 #img-expanded {
     max-width: 340px;
     width: 80%;
     border-radius: 20px;
-    border: 2px solid var(--cyan-border);
-    box-shadow: 0 0 60px rgba(0,212,255,0.2);
+    border: 2px solid var(--cyan);
+    box-shadow:
+        0 0 20px rgba(0,212,255,0.7),
+        0 0 60px rgba(0,212,255,0.35),
+        0 0 100px rgba(0,212,255,0.15);
 }
 
 /* portfolio modal */
@@ -556,10 +581,16 @@ footer {
     margin-bottom: 20px;
 }
 #album-img {
-    max-width: 680px;
+    max-width: 500px;
     width: 100%;
     border-radius: 14px;
-    border: 1px solid var(--cyan-border);
+    border: 3px solid var(--cyan);
+    box-shadow:
+        0 0 20px rgba(0,212,255,0.7),
+        0 0 60px rgba(0,212,255,0.35),
+        0 0 100px rgba(0,212,255,0.15);
+    outline: 6px solid rgba(0,212,255,0.1);
+    outline-offset: 5px;
 }
 .nav-btn {
     width: 46px; height: 46px;
@@ -577,12 +608,17 @@ footer {
 
 .album-caption {
     margin-top: 20px;
-    color: var(--muted);
-    font-size: 0.88rem;
-    line-height: 1.6;
-    max-width: 560px;
+    color: #e8eaf0;
+    font-size: 1rem;
+    line-height: 1.7;
+    font-weight: 400;
+    max-width: 520px;
     margin-left: auto;
     margin-right: auto;
+    background: rgba(0,212,255,0.06);
+    border: 1px solid rgba(0,212,255,0.25);
+    border-radius: 12px;
+    padding: 16px 22px;
 }
 
 /* ========= ANIMATIONS ========= */
@@ -934,7 +970,7 @@ footer {
 
         <div class="about-stats reveal reveal-delay-3">
             <div class="stat-card">
-                <div class="stat-num">7+</div>
+                <div class="stat-num">6+</div>
                 <div class="stat-label">Years in BPO & Tech Support</div>
             </div>
             <div class="stat-card">
@@ -942,12 +978,12 @@ footer {
                 <div class="stat-label">Top Agent Awards</div>
             </div>
             <div class="stat-card">
-                <div class="stat-num">AI</div>
-                <div class="stat-label">Tools & Workflow Automation</div>
+                <div class="stat-num">4</div>
+                <div class="stat-label">Companies Worked With</div>
             </div>
             <div class="stat-card">
-                <div class="stat-num">100%</div>
-                <div class="stat-label">Remote-Ready</div>
+                <div class="stat-num" style="font-size:1.4rem;">Onsite<br>Hybrid<br>WFH</div>
+                <div class="stat-label">Work Setup Experience</div>
             </div>
         </div>
     </div>
@@ -1072,19 +1108,27 @@ footer {
 <!-- PFP MODAL -->
 <div id="pfp-modal" class="modal">
     <button class="modal-close" id="close-pfp">&times;</button>
-    <img id="img-expanded" src="" alt="">
+    <div class="modal-inner">
+        <div class="modal-inner-content">
+            <img id="img-expanded" src="" alt="">
+        </div>
+    </div>
 </div>
 
 <!-- PORTFOLIO MODAL -->
 <div id="portfolio-album-modal" class="modal">
     <button class="modal-close" id="close-portfolio">&times;</button>
-    <div class="album-wrapper">
-        <div class="album-nav">
-            <button class="nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
-            <img id="album-img" src="" alt="">
-            <button class="nav-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+    <div class="modal-inner">
+        <div class="modal-inner-content">
+            <div class="album-wrapper">
+                <div class="album-nav">
+                    <button class="nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                    <img id="album-img" src="" alt="">
+                    <button class="nav-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <p class="album-caption" id="album-text"></p>
+            </div>
         </div>
-        <p class="album-caption" id="album-text"></p>
     </div>
 </div>
 

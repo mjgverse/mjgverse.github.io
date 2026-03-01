@@ -1278,41 +1278,125 @@ footer {
 </script>
 
 <script>
-// ========= STARS CANVAS =========
+// ========= ENHANCED SPACE CANVAS =========
 const canvas = document.getElementById('starCanvas');
 const ctx = canvas.getContext('2d');
-let stars = [];
 
-function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
 resize();
 window.addEventListener('resize', resize);
 
-for (let i = 0; i < 180; i++) {
-    stars.push({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        r: Math.random() * 1.2,
-        alpha: Math.random(),
-        speed: Math.random() * 0.005 + 0.002
-    });
+// --- STARS ---
+const stars = Array.from({ length: 220 }, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    r: Math.random() * 1.4 + 0.2,
+    alpha: Math.random(),
+    speed: (Math.random() * 0.008 + 0.002) * (Math.random() < 0.5 ? 1 : -1),
+    color: Math.random() < 0.15 ? '#a0e8ff' : '#ffffff'
+}));
+
+// --- METEORS ---
+class Meteor {
+    constructor() { this.reset(true); }
+    reset(initial = false) {
+        this.x = Math.random() * canvas.width * 1.5;
+        this.y = initial ? Math.random() * canvas.height * -1 : -20;
+        this.len = Math.random() * 60 + 30;
+        this.speed = Math.random() * 3 + 2;
+        this.alpha = 0;
+        this.fadeIn = true;
+        this.width = Math.random() * 0.8 + 0.3;
+        this.delay = initial ? Math.random() * 500 : Math.random() * 300 + 180;
+        this.timer = 0;
+    }
+    draw() {
+        if (this.timer < this.delay) { this.timer++; return; }
+        if (this.fadeIn) { this.alpha += 0.05; if (this.alpha >= 1) this.fadeIn = false; }
+        else { this.alpha -= 0.012; }
+        if (this.alpha <= 0) { this.reset(); return; }
+        this.x -= this.speed * 0.6;
+        this.y += this.speed;
+        ctx.save();
+        ctx.globalAlpha = this.alpha * 0.8;
+        const grad = ctx.createLinearGradient(this.x, this.y, this.x + this.len * 0.6, this.y - this.len);
+        grad.addColorStop(0, 'rgba(255,255,255,0)');
+        grad.addColorStop(0.7, 'rgba(160,232,255,0.6)');
+        grad.addColorStop(1, 'rgba(255,255,255,1)');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = this.width;
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x + this.len * 0.6, this.y - this.len);
+        ctx.stroke();
+        // glow tip
+        ctx.globalAlpha = this.alpha * 0.5;
+        ctx.fillStyle = '#a0e8ff';
+        ctx.beginPath();
+        ctx.arc(this.x + this.len * 0.6, this.y - this.len, this.width * 1.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+    }
 }
 
-function drawStars() {
+// --- FLOATING PARTICLES ---
+class Particle {
+    constructor() { this.reset(true); }
+    reset(initial = false) {
+        this.x = Math.random() * canvas.width;
+        this.y = initial ? Math.random() * canvas.height : canvas.height + 10;
+        this.r = Math.random() * 1.2 + 0.3;
+        this.alpha = Math.random() * 0.4 + 0.1;
+        this.speedY = -(Math.random() * 0.3 + 0.1);
+        this.speedX = (Math.random() - 0.5) * 0.2;
+        this.pulse = Math.random() * Math.PI * 2;
+    }
+    draw() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        this.pulse += 0.02;
+        const a = this.alpha * (0.6 + Math.sin(this.pulse) * 0.4);
+        if (this.y < -10) this.reset();
+        ctx.save();
+        ctx.globalAlpha = a;
+        ctx.fillStyle = '#00d4ff';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+    }
+}
+
+const meteors = Array.from({ length: 2 }, () => new Meteor());
+const particles = Array.from({ length: 40 }, () => new Particle());
+
+function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // draw stars with twinkle
     stars.forEach(s => {
         s.alpha += s.speed;
-        if (s.alpha > 1 || s.alpha < 0) s.speed *= -1;
+        if (s.alpha > 1 || s.alpha < 0.05) s.speed *= -1;
+        ctx.save();
+        ctx.globalAlpha = s.alpha * 0.7;
+        ctx.fillStyle = s.color;
+        ctx.shadowBlur = s.r > 1 ? 4 : 0;
+        ctx.shadowColor = '#a0e8ff';
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(180,220,255,${s.alpha * 0.6})`;
         ctx.fill();
+        ctx.restore();
     });
-    requestAnimationFrame(drawStars);
+
+    // draw particles
+    particles.forEach(p => p.draw());
+
+    // draw meteors
+    meteors.forEach(m => m.draw());
+
+    requestAnimationFrame(animate);
 }
-drawStars();
+animate();
 
 // ========= NAV SCROLL =========
 window.addEventListener('scroll', () => {

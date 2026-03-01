@@ -116,8 +116,9 @@ nav.scrolled { background: rgba(6,8,16,0.92); }
 }
 
 .hero-eyebrow {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     background: rgba(0,212,255,0.08);
     border: 1px solid var(--cyan-border);
@@ -128,7 +129,8 @@ nav.scrolled { background: rgba(6,8,16,0.92); }
     letter-spacing: 1.5px;
     text-transform: uppercase;
     font-weight: 600;
-    margin-bottom: 32px;
+    margin: 0 auto 24px auto;
+    width: fit-content;
     opacity: 0;
     animation: fadeUp 0.7s 0.2s forwards;
 }
@@ -217,8 +219,10 @@ nav.scrolled { background: rgba(6,8,16,0.92); }
 /* PFP in hero */
 .hero-pfp-wrap {
     position: relative;
-    display: inline-block;
-    margin-bottom: 20px;
+    display: block;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 24px auto;
     opacity: 0;
     animation: fadeDown 0.8s 0.1s forwards;
 }
@@ -516,7 +520,6 @@ footer {
     justify-content: center;
     align-items: center;
 }
-.modal.active { display: flex; }
 
 .modal-close {
     position: absolute;
@@ -1313,14 +1316,14 @@ document.querySelector('.phone-shell').addEventListener('touchend', e => {
     }
 });
 
-
+// ========= PFP MODAL =========
 const pfpModal = document.getElementById('pfp-modal');
-document.getElementById('pfp-trigger').onclick = function() {
+document.getElementById('pfp-trigger').addEventListener('click', function() {
     document.getElementById('img-expanded').src = this.src;
-    pfpModal.classList.add('active');
-};
-document.getElementById('close-pfp').onclick = () => pfpModal.classList.remove('active');
-pfpModal.onclick = (e) => { if (e.target === pfpModal) pfpModal.classList.remove('active'); };
+    pfpModal.style.display = 'flex';
+});
+document.getElementById('close-pfp').addEventListener('click', () => { pfpModal.style.display = 'none'; });
+pfpModal.addEventListener('click', (e) => { if (e.target === pfpModal) pfpModal.style.display = 'none'; });
 
 // ========= PORTFOLIO MODAL =========
 const myAchievements = [
@@ -1340,13 +1343,17 @@ function updateAlbum() {
 
 function openPortfolio(e) {
     e.preventDefault();
-    albumModal.classList.add('active');
+    albumModal.style.display = 'flex';
     updateAlbum();
 }
 
-document.getElementById('portfolio-btn').onclick = openPortfolio;
-if (document.getElementById('portfolio-nav-btn'))
-    document.getElementById('portfolio-nav-btn').onclick = openPortfolio;
-document.getElementById('nextBtn').onclick = () => { currentIdx = (currentIdx + 1) % myAchievements.length; updateAlbum(); };
-document.getElementById('prevBtn').onclick = () => { currentIdx = (currentIdx - 1 + myAchievements.length) % myAchievements.length; updateAlbum(); };
-document.getElementById('clo
+document.getElementById('portfolio-btn').addEventListener('click', openPortfolio);
+document.getElementById('portfolio-nav-btn').addEventListener('click', openPortfolio);
+document.getElementById('nextBtn').addEventListener('click', () => { currentIdx = (currentIdx + 1) % myAchievements.length; updateAlbum(); });
+document.getElementById('prevBtn').addEventListener('click', () => { currentIdx = (currentIdx - 1 + myAchievements.length) % myAchievements.length; updateAlbum(); });
+document.getElementById('close-portfolio').addEventListener('click', () => { albumModal.style.display = 'none'; });
+albumModal.addEventListener('click', (e) => { if (e.target === albumModal) albumModal.style.display = 'none'; });
+
+</script>
+</body>
+</html>

@@ -558,19 +558,18 @@ footer {
 .modal-close:hover { opacity: 1; color: var(--cyan); }
 
 #img-expanded {
-    max-width: 340px;
-    width: 80%;
-    border-radius: 20px;
-    border: 2px solid var(--cyan);
+    max-width: 500px;
+    width: 85%;
+    border-radius: 50%;
+    border: 3px solid var(--cyan);
     box-shadow:
-        0 0 20px rgba(0,212,255,0.7),
-        0 0 60px rgba(0,212,255,0.35),
-        0 0 100px rgba(0,212,255,0.15);
+        0 0 25px rgba(0,212,255,0.8),
+        0 0 60px rgba(0,212,255,0.4);
 }
 
 /* portfolio modal */
 .album-wrapper {
-    width: 90%; max-width: 860px;
+    width: 92%; max-width: 920px;
     text-align: center;
 }
 .album-nav {
@@ -581,16 +580,13 @@ footer {
     margin-bottom: 20px;
 }
 #album-img {
-    max-width: 500px;
+    max-width: 700px;
     width: 100%;
-    border-radius: 14px;
+    border-radius: 12px;
     border: 3px solid var(--cyan);
     box-shadow:
-        0 0 20px rgba(0,212,255,0.7),
-        0 0 60px rgba(0,212,255,0.35),
-        0 0 100px rgba(0,212,255,0.15);
-    outline: 6px solid rgba(0,212,255,0.1);
-    outline-offset: 5px;
+        0 0 25px rgba(0,212,255,0.7),
+        0 0 60px rgba(0,212,255,0.3);
 }
 .nav-btn {
     width: 46px; height: 46px;
@@ -609,16 +605,16 @@ footer {
 .album-caption {
     margin-top: 20px;
     color: #e8eaf0;
-    font-size: 1rem;
+    font-size: 1.05rem;
     line-height: 1.7;
     font-weight: 400;
-    max-width: 520px;
+    max-width: 680px;
     margin-left: auto;
     margin-right: auto;
     background: rgba(0,212,255,0.06);
     border: 1px solid rgba(0,212,255,0.25);
     border-radius: 12px;
-    padding: 16px 22px;
+    padding: 16px 24px;
 }
 
 /* ========= ANIMATIONS ========= */
@@ -1046,7 +1042,7 @@ footer {
                 <div class="phone-shell">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
-                        <video id="phone-video" src="assets/video1.mp4" loop playsinline></video>
+                        <video id="phone-video" src="assets/video1.mp4" playsinline></video>
                         <div class="phone-overlay" id="phone-play-overlay">
                             <button class="play-btn" id="play-toggle"><i class="fas fa-play" id="play-icon"></i></button>
                         </div>
@@ -1108,27 +1104,19 @@ footer {
 <!-- PFP MODAL -->
 <div id="pfp-modal" class="modal">
     <button class="modal-close" id="close-pfp">&times;</button>
-    <div class="modal-inner">
-        <div class="modal-inner-content">
-            <img id="img-expanded" src="" alt="">
-        </div>
-    </div>
+    <img id="img-expanded" src="" alt="">
 </div>
 
 <!-- PORTFOLIO MODAL -->
 <div id="portfolio-album-modal" class="modal">
     <button class="modal-close" id="close-portfolio">&times;</button>
-    <div class="modal-inner">
-        <div class="modal-inner-content">
-            <div class="album-wrapper">
-                <div class="album-nav">
-                    <button class="nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
-                    <img id="album-img" src="" alt="">
-                    <button class="nav-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
-                </div>
-                <p class="album-caption" id="album-text"></p>
-            </div>
+    <div class="album-wrapper">
+        <div class="album-nav">
+            <button class="nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <img id="album-img" src="" alt="">
+            <button class="nav-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
         </div>
+        <p class="album-caption" id="album-text"></p>
     </div>
 </div>
 
@@ -1349,7 +1337,16 @@ thumbs.forEach(t => {
     t.onclick = () => switchVideo(parseInt(t.dataset.index));
 });
 
-// touch/swipe on phone
+// auto-advance when video ends
+phoneVideo.addEventListener('ended', () => {
+    switchVideo((currentVid + 1) % videos.length);
+    setTimeout(() => {
+        phoneVideo.play();
+        isPlaying = true;
+        playIcon.className = 'fas fa-pause';
+        playOverlay.classList.add('hidden');
+    }, 350);
+});
 let touchStartX = 0;
 document.querySelector('.phone-shell').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
 document.querySelector('.phone-shell').addEventListener('touchend', e => {

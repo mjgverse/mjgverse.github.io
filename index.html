@@ -995,7 +995,7 @@ footer {
         <li><a href="#skills">Skills</a></li>
         <li><a href="#videos">Videos</a></li>
         <li><a href="#" id="portfolio-nav-btn">Portfolio</a></li>
-        <li><a href="mailto:mjgonzalvoofficial@gmail.com" class="nav-cta">Hire Me</a></li>
+        <li><a href="https://mail.google.com/mail/?view=cm&to=mjgonzalvoofficial@gmail.com" target="_blank" class="nav-cta">Hire Me</a></li>
     </ul>
 </nav>
 
@@ -1182,7 +1182,7 @@ footer {
         <h2 class="section-title">Let's work<br>together.</h2>
         <p>Open to full-time roles, freelance projects, and digital marketing opportunities. Let's build something great.</p>
         <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-            <a href="mailto:mjgonzalvoofficial@gmail.com" class="btn-primary">Email Me</a>
+            <a href="https://mail.google.com/mail/?view=cm&to=mjgonzalvoofficial@gmail.com" target="_blank" class="btn-primary">Email Me</a>
             <a href="https://ph.linkedin.com/in/mark-john-gonzalvo-6384b4149" target="_blank" class="btn-secondary">LinkedIn</a>
         </div>
     </div>
@@ -1212,14 +1212,14 @@ footer {
             </div>
             <div class="footer-col">
                 <h4>Experience</h4>
-                <a href="#">Customer Service</a>
-                <a href="#">Content Moderation</a>
-                <a href="#">Digital Marketing</a>
-                <a href="#">AI Tools</a>
+                <a href="#videos" class="footer-vid-link" data-vid="0">Customer Service</a>
+                <a href="#videos" class="footer-vid-link" data-vid="1">Content Moderation</a>
+                <a href="#videos" class="footer-vid-link" data-vid="2">Digital Marketing</a>
+                <a href="#videos" class="footer-vid-link" data-vid="3">AI Tools</a>
             </div>
             <div class="footer-col">
                 <h4>Contact</h4>
-                <a href="mailto:mjgonzalvoofficial@gmail.com" class="btn-primary">Email Me</a>
+                <a href="https://mail.google.com/mail/?view=cm&to=mjgonzalvoofficial@gmail.com" target="_blank">Email Me</a>
                 <a href="https://ph.linkedin.com/in/mark-john-gonzalvo-6384b4149" target="_blank">LinkedIn</a>
                 <a href="assets/MJ_Gonzalvo_Resume.pdf" target="_blank">Resume</a>
             </div>
@@ -1486,6 +1486,16 @@ document.querySelector('.phone-shell').addEventListener('touchend', e => {
         if (diff > 0) switchVideo((currentVid + 1) % videos.length);
         else switchVideo((currentVid - 1 + videos.length) % videos.length);
     }
+});
+
+// ========= FOOTER EXPERIENCE LINKS =========
+document.querySelectorAll('.footer-vid-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const idx = parseInt(link.dataset.vid);
+        document.getElementById('videos').scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => switchVideo(idx), 600);
+    });
 });
 
 // ========= PFP MODAL =========

@@ -352,7 +352,7 @@ nav.scrolled { background: rgba(6,8,16,0.92); }
     grid-template-columns: 1fr 1fr;
     gap: 60px;
     align-items: start;
-    margin-top: 60px;
+    margin-top: 0;
 }
 
 .about-text p {
@@ -363,9 +363,53 @@ nav.scrolled { background: rgba(6,8,16,0.92); }
 }
 
 .about-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    flex: 0 1 500px;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
+}
+
+.badge-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 18px;
+    padding: 20px 24px;
+    transition: border-color 0.3s;
+}
+.badge-row:hover { border-color: var(--cyan-border); }
+
+.great-badge {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 10px rgba(0,212,255,0.2));
+}
+
+.badge-desc {
+    flex: 1;
+}
+.badge-desc h4 {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--cyan);
+    margin-bottom: 6px;
+}
+.badge-desc p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.65;
+    font-weight: 300;
+}
+
+.stat-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
 }
 .stat-card {
     background: rgba(255,255,255,0.03);
@@ -615,7 +659,6 @@ footer {
     align-items: center;
 }
 
-/* Glowing edge on modal content wrappers */
 .modal-inner {
     position: relative;
     border-radius: 24px;
@@ -658,7 +701,6 @@ footer {
         0 0 60px rgba(0,212,255,0.4);
 }
 
-/* portfolio modal */
 .album-wrapper {
     width: 92%; max-width: 920px;
     text-align: center;
@@ -718,7 +760,6 @@ footer {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* scroll reveal */
 .reveal {
     opacity: 1;
     transform: translateY(0);
@@ -759,7 +800,6 @@ footer {
     justify-content: center;
 }
 
-/* Phone mockup */
 .phone-mockup { flex-shrink: 0; }
 
 .phone-shell {
@@ -848,7 +888,6 @@ footer {
     z-index: 5;
 }
 
-/* Info panel */
 .phone-info {
     max-width: 320px;
     flex: 1;
@@ -897,7 +936,6 @@ footer {
     transition: opacity 0.3s;
 }
 
-/* Thumbnail strip */
 .vid-thumbnails {
     display: flex;
     gap: 10px;
@@ -943,7 +981,6 @@ footer {
     background: rgba(0,212,255,0.15);
 }
 
-/* Video loading spinner */
 .phone-loader {
     position: absolute;
     inset: 0;
@@ -991,9 +1028,6 @@ footer {
     background: var(--cyan-dim);
 }
 
-/* fade transition */
-.vid-fading { opacity: 0 !important; transform: scale(0.97); }
-
 /* ========= RESPONSIVE ========= */
 @media (max-width: 760px) {
     nav { padding: 16px 24px; }
@@ -1008,15 +1042,15 @@ footer {
     .phone-info { max-width: 100%; text-align: center; }
     .vid-thumbnails { justify-content: center; }
     .phone-nav-btn { display: none; }
+    .badge-row { flex-direction: column; text-align: center; }
+    .stat-cards-grid { grid-template-columns: repeat(2, 1fr); }
 }
     </style>
 </head>
 <body>
 
-<!-- STARS -->
 <canvas id="starCanvas"></canvas>
 
-<!-- NAV -->
 <nav id="navbar">
     <div class="nav-logo">MJ<span>.</span></div>
     <ul class="nav-links">
@@ -1028,51 +1062,41 @@ footer {
     </ul>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
     <div>
         <div class="hero-pfp-wrap">
             <div class="pfp-ring"></div>
             <img src="assets/pfp.jpg" alt="Mark John Gonzalvo" class="hero-pfp" id="pfp-trigger">
         </div>
-
         <div class="hero-eyebrow">
             <span class="eyebrow-dot"></span>
             Available for New Opportunities
         </div>
-
         <h1 class="hero-name">Mark John Gonzalvo</h1>
-
         <p class="hero-tagline">Supporting operations and resolving customer issues with data-driven accuracy, experienced in customer support, content review, admin tasks, and digital tools.</p>
-
         <div class="hero-actions">
             <a href="assets/MJ_Gonzalvo_Resume.pdf" target="_blank" class="btn-primary">View Resume</a>
             <a href="#about" class="btn-secondary">Learn More</a>
         </div>
-
         <div class="hero-social">
             <a href="https://www.facebook.com/mjcore" target="_blank"><i class="fab fa-facebook-f"></i></a>
             <a href="https://ph.linkedin.com/in/mark-john-gonzalvo-6384b4149" target="_blank"><i class="fab fa-linkedin-in"></i></a>
             <a href="#" target="_blank"><i class="fab fa-x-twitter"></i></a>
         </div>
     </div>
-
     <div class="scroll-hint">
         <span>Scroll</span>
         <i class="fas fa-chevron-down scroll-arrow"></i>
     </div>
 </section>
 
-<!-- DIVIDER -->
 <div style="position:relative;z-index:10;padding:0 40px;"><div class="section-divider"></div></div>
 
-<!-- ABOUT -->
 <section id="about">
-    <p class="section-label reveal">About Me</p>
-    <h2 class="section-title reveal reveal-delay-1">Years of experience.<br>Driven by results.</h2>
-
     <div class="about-grid">
         <div class="about-text reveal reveal-delay-2">
+        <p class="section-label" style="margin-bottom:16px;">About Me</p>
+        <h2 class="section-title" style="margin-bottom:32px;">Years of experience.<br>Driven by results.</h2>
             <p>I've spent years in customer service and tech support, assisting clients through chat, calls, and email by addressing inquiries, resolving technical issues, and delivering clear, helpful guidance. Along the way, I gained experience in content moderation, managing data workflows, and contributing to AI training projects.</p>
             <br>
             <p>In my AI-related work, I reviewed and labeled data, tested models, and ensured quality outputs for machine learning systems, sharpening my analytical skills and attention to detail.</p>
@@ -1084,30 +1108,36 @@ footer {
         </div>
 
         <div class="about-stats reveal reveal-delay-3">
-            <div class="stat-card">
-                <div class="stat-num">6+</div>
-                <div class="stat-label">Years in BPO & Tech Support</div>
+            <div class="badge-row">
+                <img src="assets/great.png" alt="Great Person To Work With - Certified" class="great-badge">
+                <div class="badge-desc">
+                    <h4>Why work with me?</h4>
+                    <p>I'm a great person to work with because I don't just complete tasks, I provide meaningful service support and to the people those I work with.</p>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-num">3×</div>
-                <div class="stat-label">Top Agent Awards</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-num">4</div>
-                <div class="stat-label">Companies Worked With</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-num" style="font-size:1.4rem;">Onsite<br>Hybrid<br>WFH</div>
-                <div class="stat-label">Work Setup Experience</div>
+
+            <div class="stat-cards-grid">
+                <div class="stat-card">
+                    <div class="stat-num">6+</div>
+                    <div class="stat-label">Years in BPO & Tech Support</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num">3×</div>
+                    <div class="stat-label">Top Agent Awards</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num">4</div>
+                    <div class="stat-label">Companies Worked With</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num" style="font-size:1.4rem;">Onsite<br>Hybrid<br>WFH</div>
+                    <div class="stat-label">Work Setup Experience</div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- DIVIDER -->
-<div style="position:relative;z-index:10;padding:0 40px;"><div class="section-divider"></div></div>
-
-<!-- SKILLS -->
 <section id="skills">
     <p class="section-label reveal">What I Bring</p>
     <h2 class="section-title reveal reveal-delay-1">Skills & expertise<br>ready to deploy.</h2>
@@ -1144,10 +1174,8 @@ footer {
     </div>
 </section>
 
-<!-- DIVIDER -->
 <div style="position:relative;z-index:10;padding:0 40px;"><div class="section-divider"></div></div>
 
-<!-- VIDEOS -->
 <section id="videos">
     <p class="section-label reveal">In Action</p>
     <h2 class="section-title reveal reveal-delay-1">Watch me<br>work.</h2>
@@ -1156,7 +1184,6 @@ footer {
         <button class="phone-nav-btn" id="vid-prev"><i class="fas fa-chevron-left"></i></button>
 
         <div class="phone-stage">
-            <!-- Phone -->
             <div class="phone-mockup">
                 <div class="phone-shell">
                     <div class="phone-notch"></div>
@@ -1174,14 +1201,12 @@ footer {
                 </div>
             </div>
 
-            <!-- Info -->
             <div class="phone-info">
                 <div class="vid-counter" id="vid-counter">01 / 04</div>
                 <div class="vid-tag" id="vid-tag">Customer Service</div>
                 <h3 class="vid-title" id="vid-title">The Voice Behind the Solution</h3>
                 <p class="vid-desc" id="vid-desc">Handling customer concerns across calls, emails, and live chat — turning every interaction into a seamless, satisfying experience through clear communication and fast problem-solving.</p>
 
-                <!-- Thumbnails -->
                 <div class="vid-thumbnails" id="vid-thumbnails">
                     <div class="vid-thumb active" data-index="0">
                         <div class="vid-thumb-icon"><i class="fas fa-headset"></i></div>
@@ -1203,10 +1228,8 @@ footer {
     </div>
 </section>
 
-<!-- DIVIDER -->
 <div style="position:relative;z-index:10;padding:0 40px;"><div class="section-divider"></div></div>
 
-<!-- CTA -->
 <section id="cta">
     <div class="cta-box reveal">
         <p class="section-label" style="justify-content:center;display:flex;">Get In Touch</p>
@@ -1219,7 +1242,6 @@ footer {
     </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
     <div class="footer-main">
         <div class="footer-brand">
@@ -1263,13 +1285,11 @@ footer {
     </div>
 </footer>
 
-<!-- PFP MODAL -->
 <div id="pfp-modal" class="modal">
     <button class="modal-close" id="close-pfp">&times;</button>
     <img id="img-expanded" src="" alt="">
 </div>
 
-<!-- PORTFOLIO MODAL -->
 <div id="portfolio-album-modal" class="modal">
     <button class="modal-close" id="close-portfolio">&times;</button>
     <div class="album-wrapper">
@@ -1282,8 +1302,8 @@ footer {
     </div>
 </div>
 
-<!-- CHATBASE -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
 (function () {
   if (!window.chatbase || window.chatbase("getState") !== "initialized") {
     window.chatbase = (...arguments) => {
@@ -1310,7 +1330,6 @@ footer {
 </script>
 
 <script>
-// ========= ENHANCED SPACE CANVAS =========
 const canvas = document.getElementById('starCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -1318,7 +1337,6 @@ function resize() { canvas.width = window.innerWidth; canvas.height = window.inn
 resize();
 window.addEventListener('resize', resize);
 
-// --- STARS ---
 const stars = Array.from({ length: 250 }, () => ({
     x: Math.random() * window.innerWidth,
     y: Math.random() * window.innerHeight,
@@ -1328,7 +1346,6 @@ const stars = Array.from({ length: 250 }, () => ({
     color: Math.random() < 0.15 ? '#a0e8ff' : '#ffffff'
 }));
 
-// --- METEORS ---
 class Meteor {
     constructor() { this.reset(true); }
     reset(initial = false) {
@@ -1361,7 +1378,6 @@ class Meteor {
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(this.x + this.len * 0.6, this.y - this.len);
         ctx.stroke();
-        // glow tip
         ctx.globalAlpha = this.alpha * 0.5;
         ctx.fillStyle = '#a0e8ff';
         ctx.beginPath();
@@ -1371,7 +1387,6 @@ class Meteor {
     }
 }
 
-// --- FLOATING PARTICLES ---
 class Particle {
     constructor() { this.reset(true); }
     reset(initial = false) {
@@ -1404,8 +1419,6 @@ const particles = Array.from({ length: 40 }, () => new Particle());
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // draw stars with twinkle
     stars.forEach(s => {
         s.alpha += s.speed;
         if (s.alpha > 1 || s.alpha < 0.05) s.speed *= -1;
@@ -1419,27 +1432,18 @@ function animate() {
         ctx.fill();
         ctx.restore();
     });
-
-    // draw particles
     particles.forEach(p => p.draw());
-
-    // draw meteors
     meteors.forEach(m => m.draw());
-
     requestAnimationFrame(animate);
 }
 animate();
 
-// ========= NAV SCROLL =========
 window.addEventListener('scroll', () => {
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
 });
 
-// ========= SCROLL REVEAL =========
 const revealEls = document.querySelectorAll('.reveal');
-// Only hide elements if JS is running fine
 revealEls.forEach(el => el.classList.add('hidden-before-reveal'));
-
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
         if (e.isIntersecting) {
@@ -1450,27 +1454,19 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 revealEls.forEach(el => revealObserver.observe(el));
 
-// skill cards stagger
 const skillCards = document.querySelectorAll('.skill-card');
-skillCards.forEach(c => {
-    c.style.opacity = '0';
-    c.style.transform = 'translateY(30px)';
-});
+skillCards.forEach(c => { c.style.opacity = '0'; c.style.transform = 'translateY(30px)'; });
 const cardObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
         if (e.isIntersecting) {
             const delay = parseInt(e.target.dataset.delay || 0);
-            setTimeout(() => {
-                e.target.style.opacity = '1';
-                e.target.style.transform = 'translateY(0)';
-            }, delay);
+            setTimeout(() => { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }, delay);
             cardObserver.unobserve(e.target);
         }
     });
 }, { threshold: 0.1 });
 skillCards.forEach(c => cardObserver.observe(c));
 
-// ========= VIDEO CAROUSEL =========
 const videos = [
     { src: 'assets/video1.mp4', tag: 'Customer Service', title: 'The Voice Behind the Solution', desc: 'Handling customer concerns across calls, emails, and live chat — turning every interaction into a seamless, satisfying experience through clear communication and fast problem-solving.' },
     { src: 'assets/video2.mp4', tag: 'Content Moderation', title: 'Keeping Platforms Safe', desc: 'Monitoring and evaluating user-generated content to maintain a safe, positive environment — applying sharp judgment and consistent standards to protect every user on the platform.' },
@@ -1497,7 +1493,6 @@ function switchVideo(idx) {
     isPlaying = false;
     playIcon.className = 'fas fa-play';
     playOverlay.classList.remove('hidden');
-
     const info = document.querySelector('.phone-info');
     const screen = document.querySelector('.phone-screen');
     info.style.transition = 'none';
@@ -1505,7 +1500,6 @@ function switchVideo(idx) {
     info.style.opacity = '0';
     info.style.transform = 'translateX(20px)';
     screen.style.opacity = '0';
-
     setTimeout(() => {
         const v = videos[currentVid];
         phoneVideo.src = v.src;
@@ -1523,9 +1517,7 @@ function switchVideo(idx) {
     }, 300);
 }
 
-// ========= VIDEO LOADING STATE =========
 const phoneLoader = document.getElementById('phone-loader');
-
 function showLoader() { phoneLoader.classList.remove('hidden'); }
 function hideLoader() { phoneLoader.classList.add('hidden'); }
 
@@ -1535,9 +1527,6 @@ phoneVideo.addEventListener('canplay', hideLoader);
 phoneVideo.addEventListener('playing', hideLoader);
 phoneVideo.addEventListener('loadeddata', hideLoader);
 
-// also show loader on video switch (inside switchVideo timeout)
-
-// play/pause toggle
 playToggle.addEventListener('click', () => {
     if (isPlaying) {
         phoneVideo.pause();
@@ -1552,20 +1541,14 @@ playToggle.addEventListener('click', () => {
     }
 });
 
-// hover show/hide controls
 document.querySelector('.phone-shell').addEventListener('mouseenter', () => { if (isPlaying) playOverlay.classList.remove('hidden'); });
 document.querySelector('.phone-shell').addEventListener('mouseleave', () => { if (isPlaying) playOverlay.classList.add('hidden'); });
 
-// prev / next buttons
 document.getElementById('vid-prev').addEventListener('click', () => switchVideo(currentVid - 1));
 document.getElementById('vid-next').addEventListener('click', () => switchVideo(currentVid + 1));
 
-// thumbnails
-thumbs.forEach(t => {
-    t.addEventListener('click', () => switchVideo(parseInt(t.dataset.index)));
-});
+thumbs.forEach(t => { t.addEventListener('click', () => switchVideo(parseInt(t.dataset.index))); });
 
-// auto-advance on video end
 phoneVideo.addEventListener('ended', () => {
     const nextIdx = (currentVid + 1) % videos.length;
     switchVideo(nextIdx);
@@ -1577,7 +1560,6 @@ phoneVideo.addEventListener('ended', () => {
     }, 400);
 });
 
-// swipe on phone
 let touchStartX = 0;
 document.querySelector('.phone-shell').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
 document.querySelector('.phone-shell').addEventListener('touchend', e => {
@@ -1585,7 +1567,6 @@ document.querySelector('.phone-shell').addEventListener('touchend', e => {
     if (Math.abs(diff) > 40) switchVideo(diff > 0 ? currentVid + 1 : currentVid - 1);
 });
 
-// ========= FOOTER EXPERIENCE LINKS =========
 document.querySelectorAll('.footer-vid-link').forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -1595,7 +1576,6 @@ document.querySelectorAll('.footer-vid-link').forEach(link => {
     });
 });
 
-// ========= PFP MODAL =========
 const pfpModal = document.getElementById('pfp-modal');
 document.getElementById('pfp-trigger').addEventListener('click', function() {
     document.getElementById('img-expanded').src = this.src;
@@ -1604,7 +1584,6 @@ document.getElementById('pfp-trigger').addEventListener('click', function() {
 document.getElementById('close-pfp').addEventListener('click', () => { pfpModal.style.display = 'none'; });
 pfpModal.addEventListener('click', (e) => { if (e.target === pfpModal) pfpModal.style.display = 'none'; });
 
-// ========= PORTFOLIO MODAL =========
 const myAchievements = [
     { src: 'assets/cert1.jpg', desc: 'Awarded Top Agent for May 2025 in a Content Moderation account at Alorica for consistent quality and performance.' },
     { src: 'assets/cert2.jpg', desc: 'Awarded Top Agent for June 2025 in a Content Moderation account at Alorica for consistent quality and performance.' },
@@ -1633,7 +1612,6 @@ document.getElementById('nextBtn').addEventListener('click', () => { currentIdx 
 document.getElementById('prevBtn').addEventListener('click', () => { currentIdx = (currentIdx - 1 + myAchievements.length) % myAchievements.length; updateAlbum(); });
 document.getElementById('close-portfolio').addEventListener('click', () => { albumModal.style.display = 'none'; });
 albumModal.addEventListener('click', (e) => { if (e.target === albumModal) albumModal.style.display = 'none'; });
-
 </script>
 </body>
 </html>

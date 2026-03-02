@@ -1537,6 +1537,8 @@ phoneVideo.addEventListener('loadeddata', hideLoader);
 
 // also show loader on video switch (inside switchVideo timeout)
 
+// play/pause toggle
+playToggle.addEventListener('click', () => {
     if (isPlaying) {
         phoneVideo.pause();
         isPlaying = false;

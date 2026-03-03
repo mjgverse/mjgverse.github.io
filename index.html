@@ -305,6 +305,69 @@ nav.scrolled { background: rgba(6,8,16,0.92); }
 .scroll-arrow { animation: scrollBounce 2s infinite; }
 @keyframes scrollBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
 
+/* ========= ABOUT MINI MARQUEE ========= */
+.about-marquee-wrap {
+    margin-top: 32px;
+    overflow: hidden;
+    position: relative;
+}
+
+.about-marquee-wrap::before,
+.about-marquee-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 60px;
+    z-index: 2;
+    pointer-events: none;
+}
+.about-marquee-wrap::before {
+    left: 0;
+    background: linear-gradient(to right, #060810, transparent);
+}
+.about-marquee-wrap::after {
+    right: 0;
+    background: linear-gradient(to left, #060810, transparent);
+}
+
+.about-marquee-label {
+    font-size: 0.68rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    opacity: 0.55;
+    margin-bottom: 16px;
+}
+
+.about-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 18s linear infinite;
+}
+.about-marquee-track:hover { animation-play-state: paused; }
+
+.about-marquee-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 32px;
+    flex-shrink: 0;
+}
+
+.about-marquee-item img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(1) brightness(0.6);
+    opacity: 0.65;
+    transition: filter 0.3s, opacity 0.3s;
+}
+.about-marquee-item img:hover {
+    filter: grayscale(0) brightness(1);
+    opacity: 1;
+}
+
 /* ========= DIVIDER ========= */
 .section-divider {
     width: 100%;
@@ -750,7 +813,10 @@ footer {
     padding: 16px 24px;
 }
 
-/* ========= ANIMATIONS ========= */
+/* Hide mobile-only nav on desktop */
+.phone-nav-mobile { display: none; }
+.album-nav-btns-mobile { display: none; }
+.album-btn-hide-mobile { display: flex; }
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: translateY(0); }
@@ -1041,8 +1107,15 @@ footer {
     .phone-stage { flex-direction: column; gap: 32px; }
     .phone-info { max-width: 100%; text-align: center; }
     .vid-thumbnails { justify-content: center; }
+    /* Video nav buttons: show below description on mobile */
     .phone-nav-btn { display: none; }
+    .phone-nav-mobile { display: flex; gap: 16px; justify-content: center; margin-top: 20px; }
+    .phone-nav-mobile .phone-nav-btn { display: flex; }
     .badge-row { flex-direction: column; text-align: center; }
+    /* Album modal: stack buttons below image on mobile */
+    .album-nav { flex-direction: column; gap: 12px; }
+    .album-btn-hide-mobile { display: none !important; }
+    .album-nav-btns-mobile { display: flex; gap: 20px; justify-content: center; margin-top: 16px; }
     .stat-cards-grid { grid-template-columns: repeat(2, 1fr); }
 }
     </style>
@@ -1091,6 +1164,8 @@ footer {
 </section>
 
 <div style="position:relative;z-index:10;padding:0 40px;"><div class="section-divider"></div></div>
+
+
 
 <section id="about">
     <div class="about-grid">
@@ -1221,6 +1296,12 @@ footer {
                         <div class="vid-thumb-icon"><i class="fas fa-robot"></i></div>
                     </div>
                 </div>
+
+                <!-- Mobile-only prev/next buttons below description -->
+                <div class="phone-nav-mobile">
+                    <button class="phone-nav-btn" id="vid-prev-mobile" style="display:flex;"><i class="fas fa-chevron-left"></i></button>
+                    <button class="phone-nav-btn" id="vid-next-mobile" style="display:flex;"><i class="fas fa-chevron-right"></i></button>
+                </div>
             </div>
         </div>
 
@@ -1294,11 +1375,15 @@ footer {
     <button class="modal-close" id="close-portfolio">&times;</button>
     <div class="album-wrapper">
         <div class="album-nav">
-            <button class="nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <button class="nav-btn album-btn-hide-mobile" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
             <img id="album-img" src="" alt="">
-            <button class="nav-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+            <button class="nav-btn album-btn-hide-mobile" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
         </div>
         <p class="album-caption" id="album-text"></p>
+        <div class="album-nav-btns-mobile">
+            <button class="nav-btn" id="prevBtnMobile"><i class="fas fa-chevron-left"></i></button>
+            <button class="nav-btn" id="nextBtnMobile"><i class="fas fa-chevron-right"></i></button>
+        </div>
     </div>
 </div>
 
@@ -1546,6 +1631,8 @@ document.querySelector('.phone-shell').addEventListener('mouseleave', () => { if
 
 document.getElementById('vid-prev').addEventListener('click', () => switchVideo(currentVid - 1));
 document.getElementById('vid-next').addEventListener('click', () => switchVideo(currentVid + 1));
+document.getElementById('vid-prev-mobile').addEventListener('click', () => switchVideo(currentVid - 1));
+document.getElementById('vid-next-mobile').addEventListener('click', () => switchVideo(currentVid + 1));
 
 thumbs.forEach(t => { t.addEventListener('click', () => switchVideo(parseInt(t.dataset.index))); });
 
@@ -1610,6 +1697,8 @@ document.getElementById('portfolio-nav-btn').addEventListener('click', openPortf
 document.getElementById('footer-portfolio-btn').addEventListener('click', openPortfolio);
 document.getElementById('nextBtn').addEventListener('click', () => { currentIdx = (currentIdx + 1) % myAchievements.length; updateAlbum(); });
 document.getElementById('prevBtn').addEventListener('click', () => { currentIdx = (currentIdx - 1 + myAchievements.length) % myAchievements.length; updateAlbum(); });
+document.getElementById('nextBtnMobile').addEventListener('click', () => { currentIdx = (currentIdx + 1) % myAchievements.length; updateAlbum(); });
+document.getElementById('prevBtnMobile').addEventListener('click', () => { currentIdx = (currentIdx - 1 + myAchievements.length) % myAchievements.length; updateAlbum(); });
 document.getElementById('close-portfolio').addEventListener('click', () => { albumModal.style.display = 'none'; });
 albumModal.addEventListener('click', (e) => { if (e.target === albumModal) albumModal.style.display = 'none'; });
 </script>

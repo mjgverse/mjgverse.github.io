@@ -215,13 +215,63 @@ nav.scrolled { background: rgba(6,8,16,0.92); }
     transform: translateY(-2px);
 }
 
+/* ========= SPEECH BUBBLE ========= */
+.speech-bubble {
+    position: absolute;
+    bottom: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid rgba(0, 212, 255, 0.35);
+    backdrop-filter: blur(10px);
+    color: #e8eaf0;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.6;
+    padding: 12px 18px;
+    border-radius: 16px;
+    white-space: normal;
+    width: 340px;
+    text-align: center;
+    box-shadow: 0 0 18px rgba(0,212,255,0.15);
+    animation: bubblePop 0.5s 1.2s both, bubbleFloat 3s 1.7s ease-in-out infinite;
+    z-index: 10;
+    pointer-events: none;
+}
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 7px solid transparent;
+    border-top-color: rgba(0, 212, 255, 0.35);
+}
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #080f1f;
+}
+@keyframes bubblePop {
+    from { opacity: 0; transform: translateX(-50%) scale(0.85) translateY(6px); }
+    to   { opacity: 1; transform: translateX(-50%) scale(1) translateY(0); }
+}
+@keyframes bubbleFloat {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(-4px); }
+}
+
 /* PFP in hero */
 .hero-pfp-wrap {
     position: relative;
     display: block;
     width: 180px;
     height: 180px;
-    margin: 0 auto 24px auto;
+    margin: 80px auto 24px auto;
     opacity: 0;
     animation: fadeDown 0.8s 0.1s forwards;
 }
@@ -775,15 +825,7 @@ footer {
     gap: 20px;
     margin-bottom: 20px;
 }
-#album-img {
-    max-width: 700px;
-    width: 100%;
-    border-radius: 12px;
-    border: 3px solid var(--cyan);
-    box-shadow:
-        0 0 25px rgba(0,212,255,0.7),
-        0 0 60px rgba(0,212,255,0.3);
-}
+
 .nav-btn {
     width: 46px; height: 46px;
     border: 1px solid rgba(255,255,255,0.15);
@@ -797,6 +839,68 @@ footer {
     flex-shrink: 0;
 }
 .nav-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+/* Album image skeleton loader */
+.album-img-wrap {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 700px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.album-skeleton {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(0,212,255,0.08) 50%, rgba(255,255,255,0.04) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shine 1.4s infinite;
+    border-radius: 12px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.album-skeleton.hidden { display: none; }
+.skeleton-icon {
+    font-size: 2rem;
+    color: rgba(0,212,255,0.4);
+    animation: pulse 1.5s infinite;
+}
+.skeleton-bar {
+    width: 60%;
+    height: 4px;
+    background: rgba(0,212,255,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+}
+.skeleton-bar-fill {
+    height: 100%;
+    width: 40%;
+    background: var(--cyan);
+    border-radius: 4px;
+    animation: skeleton-bar-move 1.4s infinite;
+}
+@keyframes skeleton-shine {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+@keyframes skeleton-bar-move {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(300%); }
+}
+#album-img {
+    display: block;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: 12px;
+    border: 3px solid var(--cyan);
+    box-shadow: 0 0 25px rgba(0,212,255,0.7), 0 0 60px rgba(0,212,255,0.3);
+}
+#album-img.loaded { opacity: 1; }
 
 .album-caption {
     margin-top: 20px;
@@ -1138,6 +1242,7 @@ footer {
 <section id="hero">
     <div>
         <div class="hero-pfp-wrap">
+            <div class="speech-bubble">Hi, MJ here! Welcome to my space site. Feel free to check out my AI assistant in the bottom corner if you have any questions!</div>
             <div class="pfp-ring"></div>
             <img src="assets/pfp.jpg" alt="Mark John Gonzalvo" class="hero-pfp" id="pfp-trigger">
         </div>
@@ -1376,7 +1481,13 @@ footer {
     <div class="album-wrapper">
         <div class="album-nav">
             <button class="nav-btn album-btn-hide-mobile" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
-            <img id="album-img" src="" alt="">
+            <div class="album-img-wrap">
+                <div class="album-skeleton" id="album-skeleton">
+                    <i class="fas fa-image skeleton-icon"></i>
+                    <div class="skeleton-bar"><div class="skeleton-bar-fill"></div></div>
+                </div>
+                <img id="album-img" src="" alt="">
+            </div>
             <button class="nav-btn album-btn-hide-mobile" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
         </div>
         <p class="album-caption" id="album-text"></p>
@@ -1682,8 +1793,20 @@ const albumImg = document.getElementById('album-img');
 const albumText = document.getElementById('album-text');
 
 function updateAlbum() {
+    const skeleton = document.getElementById('album-skeleton');
+    albumImg.classList.remove('loaded');
+    skeleton.classList.remove('hidden');
+    albumImg.src = '';
     albumImg.src = myAchievements[currentIdx].src;
     albumText.textContent = myAchievements[currentIdx].desc;
+    albumImg.onload = () => {
+        skeleton.classList.add('hidden');
+        albumImg.classList.add('loaded');
+    };
+    albumImg.onerror = () => {
+        skeleton.classList.add('hidden');
+        albumImg.classList.add('loaded');
+    };
 }
 
 function openPortfolio(e) {
